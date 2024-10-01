@@ -1,6 +1,6 @@
-# KB IT's your life 최종 프로젝트 - FrontEnd
+# KB IT's your life 최종 프로젝트 - BackEnd
 
-- 최종 프로젝트의 FrontEnd 코드입니다.
+- 최종 프로젝트의 BackEnd 코드입니다.
 
 
 # 0️⃣ 진행 방식
