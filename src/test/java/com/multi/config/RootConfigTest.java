@@ -1,6 +1,6 @@
 package com.multi.config;
 
-import com.kb._config.RootConfig;
+import com.finns._config.RootConfig;
 import lombok.extern.log4j.Log4j;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

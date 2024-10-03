@@ -9,7 +9,7 @@
     </settings>
 
     <typeAliases>
-        <package name="com.kb.**.dto" />
+        <package name="com.finns.**.dto" />
     </typeAliases>
 
 </configuration>

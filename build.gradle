@@ -3,7 +3,7 @@ plugins {
   id 'war'
 }
 
-group 'com.kb'
+group 'com.finns'
 version '1.0-SNAPSHOT'
 
 repositories {

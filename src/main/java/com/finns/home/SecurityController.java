@@ -1,6 +1,6 @@
 package com.finns.home;
 
-import com.kb.member.dto.Member;
+import com.finns.member.dto.Member;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

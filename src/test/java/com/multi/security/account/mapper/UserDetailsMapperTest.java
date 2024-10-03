@@ -1,7 +1,7 @@
 package com.multi.security.account.mapper;
 
-import com.kb._config.RootConfig;
-import com.kb._config.SecurityConfig;
+import com.finns._config.RootConfig;
+import com.finns._config.SecurityConfig;
 import lombok.extern.log4j.Log4j;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
