@@ -1,11 +1,11 @@
 package com.multi.security.util;
 
-import com.kb.security.util.JwtProcessor;
+import com.finns.security.util.JwtProcessor;
 import lombok.extern.log4j.Log4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import com.kb._config.RootConfig;
-import com.kb._config.SecurityConfig;
+import com.finns._config.RootConfig;
+import com.finns._config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
