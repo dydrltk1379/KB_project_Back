@@ -10,6 +10,7 @@ import java.io.Writer;
 public class JsonResponse {
     public static <T> void send(HttpServletResponse response, T result) throws IOException {
         ObjectMapper om = new ObjectMapper();
+
         response.setContentType("application/json;charset=UTF-8");
         Writer out = response.getWriter();
         out.write(om.writeValueAsString(result));
@@ -23,5 +24,4 @@ public class JsonResponse {
         out.write(message);
         out.flush();
     }
-
 }
