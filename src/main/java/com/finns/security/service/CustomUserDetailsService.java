@@ -1,28 +1,36 @@
 package com.finns.security.service;
 
-import com.finns.member.mapper.MemberMapper;
-import com.finns.member.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import com.finns.security.account.domain.CustomUser;
+import com.finns.security.account.domain.MemberVO;
+import com.finns.security.account.mapper.UserDetailsMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Log4j
-@Component
+//@Component
+@Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    final private MemberMapper mapper;
+    private final UserDetailsMapper mapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = mapper.selectById(username);
-        if(member == null) {
-            throw new UsernameNotFoundException(username + "은 없는 id 입니다.");
+        log.debug("Loading user by username: " + username);
+
+        MemberVO vo = mapper.get(username);
+        if (vo == null) {
+            log.error("User not found: " + username);
+            throw new UsernameNotFoundException(username + "은 없는 id입니다.");
         }
-        return member;
+
+        log.debug("User found: " + vo.getUsername());
+
+        return new CustomUser(vo); // UserDetails 구현체 반환
     }
 
 }
