@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.finns.post.mapper.PostMapper">
+
+    <select id="selectOne" parameterType="long" resultType="com.finns.post.dto.Post">
+        SELECT post_no, user_no, card_no, public_status, category, memo, amount, place, transaction_date, great_count, stupid_count, renew_status
+        FROM post
+        WHERE post_no = #{no}
+    </select>
+
+    <select id="selectAllByUserAndDateAndIsPublic" parameterType="com.finns.post.dto.PostRequestDTO" resultType="com.finns.post.dto.Post">
+        SELECT post_no, user_no, card_no, public_status, category, memo, amount, place, transaction_date, great_count, stupid_count, renew_status
+        FROM post
+        WHERE user_no = #{userNo}
+            AND DATE(transaction_date) = #{date}
+            AND renew_status = true
+
+            <!-- isOnlyPublic가 true이면 공개된 소비내역만 끌고 옴 -->
+            <if test="isOnlyPublic">
+                AND public_status = true
+            </if>
+    </select>
+
+    <update id="updateRenewStatusByUser" parameterType="com.finns.post.dto.ChangeRenewStatusDTO">
+        UPDATE post
+        SET renew_status = true
+        WHERE user_no = #{userNo}
+            AND transaction_date &gt; (SELECT renew_time FROM user WHERE user_no = #{userNo})
+            AND transaction_date &lt;= #{now};
+    </update>
+
+    <update id="updateCount"></update>
+
+    <update id="updatePost"></update>
+</mapper>
