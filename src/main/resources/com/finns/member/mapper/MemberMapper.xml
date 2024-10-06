@@ -10,7 +10,7 @@
 
     <resultMap id="memberMap" type="MemberVO">
         <id property="user_no" column="user_no" />
-        <result property="user_no" column="user_no" />
+<!--        <result property="user_no" column="user_no" />-->
         <result property="username" column="username" />
         <result property="password" column="password" />
         <result property="birth" column="birth" />

@@ -21,7 +21,7 @@
         <collection property="authList" resultMap="authMap"/>
     </resultMap>
 
-    <select id="get" resultMap="memberMap">
+    <select id="get" resultMap="memberMap" parameterType="String">
         SELECT m.username, m.password,m.birth, m.mbti_no, m.imgurl,m.renew_date
         FROM
             users m

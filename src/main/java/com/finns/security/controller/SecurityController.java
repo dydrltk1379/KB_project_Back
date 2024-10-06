@@ -33,8 +33,6 @@ public class SecurityController {
     @GetMapping("/admin")
     public void doAdmin(@AuthenticationPrincipal CustomUser customUser) {
         MemberVO member = customUser.getMember();
-
-
         log.info("username = " + member);
     }
 

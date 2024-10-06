@@ -14,5 +14,5 @@ public interface MemberService {
 
     MemberDTO update(MemberUpdateDTO member);
 
-    void changePassword(ChangePasswordDTO changePassword);
+//    void changePassword(ChangePasswordDTO changePassword);
 }

@@ -67,23 +67,40 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public MemberDTO update(MemberUpdateDTO member) {
+        // 기존 회원 정보 가져오기
         MemberVO vo = mapper.get(member.getUsername());
-        if(!passwordEncoder.matches(member.getPassword(),vo.getPassword())) { // 비밀번호 일치 확인
-            throw new PasswordMissmatchException();
+
+        // 현재 비밀번호 확인
+        if (!passwordEncoder.matches(member.getPassword(), vo.getPassword())) {
+            throw new PasswordMissmatchException(); // 비밀번호 불일치 예외 처리
         }
-        mapper.update(member.toVO());
+
+        // 새로운 비밀번호가 존재하면 암호화된 비밀번호 사용, 그렇지 않으면 기존 비밀번호 사용
+        String encodedPassword = (member.getNewPassword() != null && !member.getNewPassword().isEmpty())
+                ? passwordEncoder.encode(member.getNewPassword())
+                : vo.getPassword(); // 기존 비밀번호 유지
+
+        // 업데이트할 `MemberVO` 객체 생성
+        MemberVO updatedVO = member.toVO(encodedPassword);
+
+        // 데이터베이스 업데이트
+        mapper.update(updatedVO);
+
+        // 아바타 업데이트
         saveAvatar(member.getAvatar(), member.getUsername());
+
         return get(member.getUsername());
     }
 
 
-    @Override
-    public void changePassword(ChangePasswordDTO changePassword) {
-        MemberVO member = mapper.get(changePassword.getUsername());
-        if(!passwordEncoder.matches(changePassword.getOldPassword(), member.getPassword())) {
-            throw new PasswordMissmatchException();
-        }
-        changePassword.setNewPassword(passwordEncoder.encode(changePassword.getNewPassword()));
-        mapper.updatePassword(changePassword);
-    }
+
+//    @Override
+//    public void changePassword(ChangePasswordDTO changePassword) {
+//        MemberVO member = mapper.get(changePassword.getUsername());
+//        if(!passwordEncoder.matches(changePassword.getOldPassword(), member.getPassword())) {
+//            throw new PasswordMissmatchException();
+//        }
+//        changePassword.setNewPassword(passwordEncoder.encode(changePassword.getNewPassword()));
+//        mapper.updatePassword(changePassword);
+//    }
 }
