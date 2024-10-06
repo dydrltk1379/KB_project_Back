@@ -37,12 +37,12 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-    @PutMapping("/members/{no}/renew")
+    @PutMapping("/users/{no}/renew")
     public ResponseEntity<?> renewPosts(@PathVariable("no") Long userNo) {
         LocalDateTime now = LocalDateTime.now();
 
         ChangeRenewStatusDTO changeRenewStatusDTO = new ChangeRenewStatusDTO(userNo, now);
-        postService.renewPostsByUser(changeRenewStatusDTO);
+        postService.updateRenewStatusAndAmount(changeRenewStatusDTO);
 
         // user의 renew_time을 변수 now로 업데이트 해줘야함
         // user쪽에서 구현해서 userService로 동작시키자!

@@ -32,6 +32,14 @@
             AND transaction_date &lt;= #{now};
     </update>
 
+    <select id="selectUpdatedRenewPost" parameterType="com.finns.post.dto.ChangeRenewStatusDTO" resultType="com.finns.amountByDate.dto.UpdateAmountDTO">
+        SELECT DATE(transaction_date) as transaction_date, user_no, amount
+        FROM post
+        WHERE user_no = #{userNo}
+        AND transaction_date &gt; (SELECT renew_time FROM user WHERE user_no = #{userNo})
+        AND transaction_date &lt;= #{now}
+    </select>
+
     <update id="updateCount"></update>
 
     <update id="updatePost"></update>

@@ -2,7 +2,7 @@ package com.finns.post.dto;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +18,7 @@ public class Post {
     private String memo;
     private long amount;
     private String place;
-    private Date transactionDate;
+    private LocalDateTime transactionDate;
     private long greatCount;
     private long stupidCount;
     private boolean renewStatus;

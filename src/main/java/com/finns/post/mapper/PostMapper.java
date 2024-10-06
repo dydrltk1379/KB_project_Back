@@ -1,5 +1,6 @@
 package com.finns.post.mapper;
 
+import com.finns.amountByDate.dto.UpdateAmountDTO;
 import com.finns.post.dto.ChangeCountDTO;
 import com.finns.post.dto.ChangeRenewStatusDTO;
 import com.finns.post.dto.Post;
@@ -16,6 +17,8 @@ public interface PostMapper {
 
     // 갱신 버튼 클릭 시(멤버의 마지막 갱신날짜 이후 ~ 현재까지의 게시글들의 renew_status를 true로 수정)
     void updateRenewStatusByUser(ChangeRenewStatusDTO changeRenewStatusDTO);
+
+    List<UpdateAmountDTO> selectUpdatedRenewPost(ChangeRenewStatusDTO changeRenewStatusDTO);
 
     long updateCount(ChangeCountDTO changeCountDTO);
 

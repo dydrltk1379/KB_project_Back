@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.finns.amountByDate.mapper.AmountByDateMapper">
+
+    <select id="selectAllByUser" resultType="com.finns.amountByDate.dto.AmountByDate">
+        SELECT transaction_date, user_no, amount
+        FROM amount_by_date
+        WHERE user_no = #{userNo}
+    </select>
+
+    <update id="updateByDateAndUser" parameterType="com.finns.amountByDate.dto.UpdateAmountDTO">
+        UPDATE amount_by_date
+        SET amount = amount + #{amount}
+        WHERE transaction_date = #{transactionDate}
+            AND user_no = #{userNo}
+    </update>
+
+</mapper>
