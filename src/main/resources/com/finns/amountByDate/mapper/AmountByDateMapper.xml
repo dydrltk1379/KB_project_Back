@@ -11,11 +11,12 @@
         WHERE user_no = #{userNo}
     </select>
 
-    <update id="updateByDateAndUser" parameterType="com.finns.amountByDate.dto.UpdateAmountDTO">
-        UPDATE amount_by_date
-        SET amount = amount + #{amount}
-        WHERE transaction_date = #{transactionDate}
-            AND user_no = #{userNo}
-    </update>
+    <insert id="upsertByDateAndUser" parameterType="com.finns.amountByDate.dto.UpdateAmountDTO">
+        INSERT INTO amount_by_date (transaction_date, user_no, amount)
+        VALUES (#{transactionDate}, #{userNo}, #{amount})
+            ON DUPLICATE KEY UPDATE amount = amount + VALUES(amount)
+    </insert>
+
+
 
 </mapper>

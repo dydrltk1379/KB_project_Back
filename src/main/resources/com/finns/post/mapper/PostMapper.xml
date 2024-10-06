@@ -28,16 +28,24 @@
         UPDATE post
         SET renew_status = true
         WHERE user_no = #{userNo}
+            AND renew_status = false
             AND transaction_date &gt; (SELECT renew_time FROM user WHERE user_no = #{userNo})
-            AND transaction_date &lt;= #{now};
+            AND transaction_date &lt;= #{now}
     </update>
 
     <select id="selectUpdatedRenewPost" parameterType="com.finns.post.dto.ChangeRenewStatusDTO" resultType="com.finns.amountByDate.dto.UpdateAmountDTO">
         SELECT DATE(transaction_date) as transaction_date, user_no, amount
         FROM post
         WHERE user_no = #{userNo}
-        AND transaction_date &gt; (SELECT renew_time FROM user WHERE user_no = #{userNo})
-        AND transaction_date &lt;= #{now}
+            AND renew_status = false
+            AND transaction_date &gt; (SELECT renew_time FROM user WHERE user_no = #{userNo})
+            AND transaction_date &lt;= #{now}
+    </select>
+
+    <select id="selectCountByUser" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM post
+        WHERE user_no = #{userNo}
     </select>
 
     <update id="updateCount"></update>
