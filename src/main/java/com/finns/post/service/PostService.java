@@ -51,4 +51,9 @@ public class PostService {
         }
     }
 
+    public Long getCountByUser(Long userNo) {
+        return Optional.of(postMapper.selectCountByUser(userNo))
+                .orElseThrow(NoSuchElementException::new);
+    }
+
 }

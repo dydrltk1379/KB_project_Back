@@ -20,6 +20,8 @@ public interface PostMapper {
 
     List<UpdateAmountDTO> selectUpdatedRenewPost(ChangeRenewStatusDTO changeRenewStatusDTO);
 
+    long selectCountByUser(Long userNo);
+
     long updateCount(ChangeCountDTO changeCountDTO);
 
     long updatePost(Post post);     // 공개 여부, 갱신 여부, 메모에 대해서만 update할 수 있으므로 분리?

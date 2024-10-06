@@ -51,6 +51,9 @@ public class PostController {
         return ResponseEntity.ok().build();
     }
 
-
-
+    @GetMapping("/users/{no}/posts/count")
+    public ResponseEntity<Long> countPosts(@PathVariable("no") Long userNo) {
+        Long count = postService.getCountByUser(userNo);
+        return ResponseEntity.ok(count);
+    }
 }

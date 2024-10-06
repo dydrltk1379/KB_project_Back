@@ -40,6 +40,12 @@
         AND transaction_date &lt;= #{now}
     </select>
 
+    <select id="selectCountByUser" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM post
+        WHERE user_no = #{userNo}
+    </select>
+
     <update id="updateCount"></update>
 
     <update id="updatePost"></update>
