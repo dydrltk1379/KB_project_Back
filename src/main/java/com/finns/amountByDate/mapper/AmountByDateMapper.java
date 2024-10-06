@@ -10,5 +10,5 @@ public interface AmountByDateMapper {
     List<AmountByDate> selectAllByUser(Long userNo);
 
     // 날짜와 유저로 금액 업데이트(갱신 시)
-    void updateByDateAndUser(UpdateAmountDTO updateAmountDTO);
+    void upsertByDateAndUser(UpdateAmountDTO updateAmountDTO);
 }

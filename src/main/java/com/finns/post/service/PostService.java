@@ -39,16 +39,16 @@ public class PostService {
 
     @Transactional
     public void updateRenewStatusAndAmount(ChangeRenewStatusDTO changeRenewStatusDTO) {
-        // 1. renew_status 업데이트
-        postMapper.updateRenewStatusByUser(changeRenewStatusDTO);
-
-        // 2. 갱신된 post의 date, userNo, amount 가져오기
+        // 1. 갱신된 post의 date, userNo, amount 가져오기
         List<UpdateAmountDTO> updatedPosts = postMapper.selectUpdatedRenewPost(changeRenewStatusDTO);
 
-        // 3. 갱신된 각 데이터에 대해 amount 업데이트
+        // 2. 갱신된 각 데이터에 대해 amount 업데이트
         for (UpdateAmountDTO post : updatedPosts) {
-            amountByDateMapper.updateByDateAndUser(post);
+            amountByDateMapper.upsertByDateAndUser(post);
         }
+
+        // 3. renew_status 업데이트
+        postMapper.updateRenewStatusByUser(changeRenewStatusDTO);
     }
 
     public Long getCountByUser(Long userNo) {
