@@ -18,7 +18,7 @@ public class Post {
     private String memo;
     private long amount;
     private String place;
-    private LocalDateTime transactionDate;
+    private String transactionDate;
     private long greatCount;
     private long stupidCount;
     private boolean renewStatus;

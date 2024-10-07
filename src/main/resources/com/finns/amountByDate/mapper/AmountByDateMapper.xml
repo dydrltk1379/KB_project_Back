@@ -6,12 +6,12 @@
 <mapper namespace="com.finns.amountByDate.mapper.AmountByDateMapper">
 
     <select id="selectAllByUser" resultType="com.finns.amountByDate.dto.AmountByDate">
-        SELECT transaction_date, user_no, amount
+        SELECT DATE_FORMAT(transaction_date, '%Y-%m-%d') as transaction_date, user_no, amount
         FROM amount_by_date
         WHERE user_no = #{userNo}
     </select>
 
-    <insert id="upsertByDateAndUser" parameterType="com.finns.amountByDate.dto.UpdateAmountDTO">
+    <insert id="upsertByDateAndUser" parameterType="com.finns.post.dto.UpdateAmountDTO">
         INSERT INTO amount_by_date (transaction_date, user_no, amount)
         VALUES (#{transactionDate}, #{userNo}, #{amount})
             ON DUPLICATE KEY UPDATE amount = amount + VALUES(amount)

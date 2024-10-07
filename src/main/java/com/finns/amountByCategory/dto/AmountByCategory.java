@@ -1,16 +1,14 @@
-package com.finns.amountByDate.dto;
+package com.finns.amountByCategory.dto;
 
 import lombok.*;
-
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class AmountByDate {
-    private String transactionDate;
+public class AmountByCategory {
+    private String category;
     private long userNo;
     private long amount;
 }

@@ -33,8 +33,8 @@
             AND transaction_date &lt;= #{now}
     </update>
 
-    <select id="selectUpdatedRenewPost" parameterType="com.finns.post.dto.ChangeRenewStatusDTO" resultType="com.finns.amountByDate.dto.UpdateAmountDTO">
-        SELECT DATE(transaction_date) as transaction_date, user_no, amount
+    <select id="selectUpdatedRenewPost" parameterType="com.finns.post.dto.ChangeRenewStatusDTO" resultType="com.finns.post.dto.UpdateAmountDTO">
+        SELECT DATE(transaction_date) as transaction_date, category, user_no, amount
         FROM post
         WHERE user_no = #{userNo}
             AND renew_status = false
@@ -48,7 +48,13 @@
         WHERE user_no = #{userNo}
     </select>
 
-    <update id="updateCount"></update>
+    <update id="updatePublicStatus">
+        UPDATE post
+        SET public_status = NOT public_status
+        WHERE post_no = #{postNo}
+    </update>
 
+
+    <update id="updateCount"></update>
     <update id="updatePost"></update>
 </mapper>
