@@ -1,15 +1,19 @@
-package com.finns.member.dto;
+package com.finns.security.account.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChangePasswordDTO {
+@Builder
+public class MemberVO {
     private int user_no;
     private String username;
     private String password;
@@ -17,6 +21,8 @@ public class ChangePasswordDTO {
     private String mbti_no;
     private String imgurl;
     private Date renew_date;
-    String oldPassword; // 이전 비밀번호
-    String newPassword; // 새 비밀번호
+
+    private List<AuthVO> authList;
+
+    UserDetails details;
 }

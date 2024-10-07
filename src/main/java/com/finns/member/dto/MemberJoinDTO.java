@@ -1,15 +1,20 @@
 package com.finns.member.dto;
 
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.finns.security.account.domain.MemberVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChangePasswordDTO {
+@Builder
+public class MemberJoinDTO {
     private int user_no;
     private String username;
     private String password;
@@ -17,6 +22,13 @@ public class ChangePasswordDTO {
     private String mbti_no;
     private String imgurl;
     private Date renew_date;
-    String oldPassword; // 이전 비밀번호
-    String newPassword; // 새 비밀번호
+
+    MultipartFile avatar;
+
+    public MemberVO toVO(){
+        return MemberVO.builder()
+                .username(username)
+                .password(password)
+                .build();
+    }
 }
