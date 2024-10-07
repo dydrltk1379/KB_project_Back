@@ -16,10 +16,11 @@
         <result property="birth" column="birth" />
         <result property="mbti_no" column="mbti_no" />
         <result property="imgurl" column="imgurl" />
+        <result property="renew_date" column="renew_date" />
         <collection property="authList" resultMap="authMap" />
     </resultMap>
     <select id="get" resultMap="memberMap">
-        SELECT m.username , m.password ,m.birth , m.mbti_no , m.imgurl
+        SELECT m.username , m.password ,m.birth , m.mbti_no , m.imgurl ,m.renew_date
         FROM
             users m
                 LEFT OUTER JOIN users a
