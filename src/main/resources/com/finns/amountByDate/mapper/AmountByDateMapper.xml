@@ -11,7 +11,7 @@
         WHERE user_no = #{userNo}
     </select>
 
-    <insert id="upsertByDateAndUser" parameterType="com.finns.amountByDate.dto.UpdateAmountDTO">
+    <insert id="upsertByDateAndUser" parameterType="com.finns.post.dto.UpdateAmountDTO">
         INSERT INTO amount_by_date (transaction_date, user_no, amount)
         VALUES (#{transactionDate}, #{userNo}, #{amount})
             ON DUPLICATE KEY UPDATE amount = amount + VALUES(amount)

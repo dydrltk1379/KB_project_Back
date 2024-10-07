@@ -1,7 +1,6 @@
 package com.finns.amountByDate.controller;
 
 import com.finns.amountByDate.dto.AmountByDate;
-import com.finns.amountByDate.dto.UpdateAmountDTO;
 import com.finns.amountByDate.service.AmountByDateService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;

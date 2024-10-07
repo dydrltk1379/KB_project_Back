@@ -1,7 +1,7 @@
 package com.finns.amountByDate.mapper;
 
 import com.finns.amountByDate.dto.AmountByDate;
-import com.finns.amountByDate.dto.UpdateAmountDTO;
+import com.finns.post.dto.UpdateAmountDTO;
 
 import java.util.List;
 

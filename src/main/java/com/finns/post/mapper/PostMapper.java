@@ -1,6 +1,6 @@
 package com.finns.post.mapper;
 
-import com.finns.amountByDate.dto.UpdateAmountDTO;
+import com.finns.post.dto.UpdateAmountDTO;
 import com.finns.post.dto.ChangeCountDTO;
 import com.finns.post.dto.ChangeRenewStatusDTO;
 import com.finns.post.dto.Post;
