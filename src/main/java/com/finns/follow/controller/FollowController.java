@@ -39,23 +39,23 @@ public class FollowController {
 
     /**
      * 사용자가 팔로잉하고 있는 사용자 목록을 가져온다.
-     * @param userNo 사용자 번호
+     * @param user_no 사용자 번호
      * @return 팔로잉 사용자 번호 목록
      */
-    @GetMapping("/following/{userNo}")
-    public ResponseEntity<List<Integer>> getFollowingList(@PathVariable int userNo) {
-        List<Integer> followingList = followService.getFollowingList(userNo);
+    @GetMapping("/following/{user_no}")
+    public ResponseEntity<List<Integer>> getFollowingList(@PathVariable int user_no) {
+        List<Integer> followingList = followService.getFollowingList(user_no);
         return ResponseEntity.ok(followingList);
     }
 
     /**
      * 사용자를 팔로우하는 사용자 목록을 가져온다.
-     * @param userNo 사용자 번호
+     * @param user_no 사용자 번호
      * @return 팔로워 사용자 번호 목록
      */
-    @GetMapping("/followers/{userNo}")
-    public ResponseEntity<List<Integer>> getFollowerList(@PathVariable int userNo) {
-        List<Integer> followerList = followService.getFollowerList(userNo);
+    @GetMapping("/followers/{user_no}")
+    public ResponseEntity<List<Integer>> getFollowerList(@PathVariable int user_no) {
+        List<Integer> followerList = followService.getFollowerList(user_no);
         return ResponseEntity.ok(followerList);
     }
 }

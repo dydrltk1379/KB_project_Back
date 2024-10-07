@@ -19,7 +19,6 @@ public class UserInfoDTO {
     private String birth;
     private String mbti_no;
     private String imgurl;
-    private Date renew_date;
     List<String> roles;
 
     public static UserInfoDTO of(MemberVO member) {
@@ -35,7 +34,6 @@ public class UserInfoDTO {
                 member.getBirth(),
                 member.getMbti_no(),
                 member.getImgurl(),
-                member.getRenew_date(),
                 member.getAuthList().stream()
                         .map(a -> a.getAuthority())
                         .collect(Collectors.toList()) // 변경된 부분

@@ -16,7 +16,6 @@ public class ChangePasswordDTO {
     private String birth;
     private String mbti_no;
     private String imgurl;
-    private Date renew_date;
     String oldPassword; // 이전 비밀번호
     String newPassword; // 새 비밀번호
 }
