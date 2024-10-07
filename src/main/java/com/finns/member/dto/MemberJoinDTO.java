@@ -21,7 +21,6 @@ public class MemberJoinDTO {
     private String birth;
     private String mbti_no;
     private String imgurl;
-    private Date renew_date;
 
     MultipartFile avatar;
 

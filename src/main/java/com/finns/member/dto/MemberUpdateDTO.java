@@ -19,7 +19,6 @@ public class MemberUpdateDTO {
     private String birth;
     private String mbti_no;
     private String imgurl;
-    private Date renew_date;
 
     private MultipartFile avatar; // 접근 제어자 추가
 
@@ -35,7 +34,6 @@ public class MemberUpdateDTO {
                 .birth(birth)
                 .mbti_no(mbti_no)
                 .imgurl(imgurl)
-                .renew_date(renew_date)
                 .authList(null) // 권한 정보는 필요에 따라 설정
                 .build();
     }

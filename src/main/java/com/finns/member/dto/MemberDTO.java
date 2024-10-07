@@ -21,7 +21,6 @@ public class MemberDTO {
     private String birth;
     private String mbti_no;
     private String imgurl;
-    private Date renew_date;
 
     MultipartFile avatar;
 
@@ -34,7 +33,6 @@ public class MemberDTO {
                 .birth(m.getBirth())
                 .mbti_no(m.getMbti_no())
                 .imgurl(m.getImgurl())
-                .renew_date(m.getRenew_date())
                 .authList(m.getAuthList().stream().map(a->a.getAuthority()).toList())
                 .build();
     }
@@ -46,7 +44,6 @@ public class MemberDTO {
                 .birth(birth)
                 .mbti_no(mbti_no)
                 .imgurl(imgurl)
-                .renew_date(renew_date)
                 .build();
     }
 }
