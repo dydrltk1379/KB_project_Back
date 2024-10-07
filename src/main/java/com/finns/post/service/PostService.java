@@ -58,4 +58,9 @@ public class PostService {
                 .orElseThrow(NoSuchElementException::new);
     }
 
+    @Transactional
+    public void reversePublicStatus(Long no) {
+        postMapper.updatePublicStatus(no);
+    }
+
 }

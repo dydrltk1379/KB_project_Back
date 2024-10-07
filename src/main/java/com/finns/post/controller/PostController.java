@@ -21,6 +21,7 @@ import static java.time.LocalTime.now;
 @RequiredArgsConstructor
 @Api(value = "PostController", tags = "게시글 정보")
 @PropertySource({"classpath:/application.properties"})
+@CrossOrigin(origins = "http://localhost:5173") // 클라이언트의 도메인을 허용
 public class PostController {
 
     private final PostService postService;
@@ -55,5 +56,11 @@ public class PostController {
     public ResponseEntity<Long> countPosts(@PathVariable("no") Long userNo) {
         Long count = postService.getCountByUser(userNo);
         return ResponseEntity.ok(count);
+    }
+
+    @PutMapping("posts/{no}/togglePublicStatus")
+    public ResponseEntity<?> togglePublicStatus(@PathVariable("no") Long no) {
+        postService.reversePublicStatus(no);
+        return ResponseEntity.ok().build();
     }
 }

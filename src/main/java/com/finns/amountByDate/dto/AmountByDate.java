@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class AmountByDate {
-    private LocalDate transactionDate;
+    private String transactionDate;
     private long userNo;
     private long amount;
 }

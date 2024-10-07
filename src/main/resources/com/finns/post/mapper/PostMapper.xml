@@ -48,7 +48,13 @@
         WHERE user_no = #{userNo}
     </select>
 
-    <update id="updateCount"></update>
+    <update id="updatePublicStatus">
+        UPDATE post
+        SET public_status = NOT public_status
+        WHERE post_no = #{postNo}
+    </update>
 
+
+    <update id="updateCount"></update>
     <update id="updatePost"></update>
 </mapper>
