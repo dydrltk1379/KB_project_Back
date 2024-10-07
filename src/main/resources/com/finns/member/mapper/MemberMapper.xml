@@ -2,55 +2,93 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.finns.member.mapper.MemberMapper"> <resultMap id="authMap" type="AuthVO">
-    <result property="username" column="username" />
-    <result property="authority" column="authority" />
-</resultMap
->
 
-    <resultMap id="memberMap" type="MemberVO">
-        <id property="user_no" column="user_no" />
-<!--        <result property="user_no" column="user_no" />-->
-        <result property="username" column="username" />
-        <result property="password" column="password" />
-        <result property="birth" column="birth" />
-        <result property="mbti_no" column="mbti_no" />
-        <result property="imgurl" column="imgurl" />
-        <result property="renew_date" column="renew_date" />
-        <collection property="authList" resultMap="authMap" />
+<mapper namespace="com.finns.member.mapper.MemberMapper">
+
+    <resultMap id="memberResultMap"  type="com.finns.member.dto.Member">
+        <id property="mno" 				column="mno" />
+        <result property="id"		    column="id" />
+        <result property="password"		column="password" />
+        <result property="name" 		column="name" />
+        <result property="email" 		column="email" />
+        <result property="status" 		column="status" />
+        <result property="createDate"	column="create_date" />
+        <result property="modifyDate"	column="modify_date" />
+        <collection property="authorities"
+                    javaType="arraylist"
+                    ofType="org.springframework.security.core.authority.SimpleGrantedAuthority"
+                    resultMap="authoritiesMap"/>
     </resultMap>
-    <select id="get" resultMap="memberMap">
-        SELECT m.username , m.password ,m.birth , m.mbti_no , m.imgurl ,m.renew_date
+
+    <resultMap type="org.springframework.security.core.authority.SimpleGrantedAuthority" id="authoritiesMap">
+        <constructor>
+            <arg column="authority" javaType="string"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectMemberAll" resultMap="memberResultMap">
+        SELECT
+            mno, m.id, password, name, email, status, create_date, modify_date, a.authority
         FROM
-            users m
-                LEFT OUTER JOIN users a
-                                ON m.username = a.username
-        where m.username = #{username}
+            member m
+            LEFT OUTER JOIN member_auth a ON m.id = a.id
+        WHERE m.status = 'y'
     </select>
-    <select id="checkUsername" resultType="com.finns.security.account.domain.MemberVO">
-        SELECT * FROM users WHERE username = #{username}
+
+
+    <select id="selectById" resultMap="memberResultMap" parameterType="string">
+        SELECT
+            mno, m.id, password, name, email, status, create_date, modify_date, a.authority
+        FROM
+            member m
+            LEFT OUTER JOIN member_auth a ON m.id = a.id
+        WHERE m.status = 'y' and m.id = #{id}
     </select>
-    <insert id="insert">
-        INSERT INTO users(user_no , username , password, birth , mbti_no,imgurl)
-        VALUES(default,#{username}, #{password}, #{birth},#{mbti_no} ,#{imgurl})
-    </insert>
-    <insert id="insertAuth">
-        INSERT INTO users_auth(username, authority)
-        VALUES(#{username}, #{authority})
+
+    <insert id="insertMember" parameterType="com.finns.member.dto.Member">
+        INSERT INTO member(mno, id, password, name, email, status)
+        VALUES(default, #{id}, #{password}, #{name}, #{email}, default)
     </insert>
 
-    <update id="update">
-        UPDATE users
+
+    <update id="updateMember" parameterType="com.finns.member.dto.Member">
+        UPDATE member
         SET
-            update_date = now()
-        WHERE username =#{username}
+            name = #{name},
+            email = #{email},
+            modify_date = now()
+        WHERE mno = #{mno}
     </update>
 
-    <update id="updatePassword">
-        UPDATE users
+
+    <update id="updatePassword" parameterType="com.finns.member.dto.Member">
+        UPDATE member
         SET
             password = #{newPassword},
-            update_date = now()
-        WHERE username =#{username}
+            modify_date = now()
+        WHERE id = #{id}
     </update>
+
+<!--    <delete id="deleteMember">-->
+<!--        DELETE FROM member-->
+<!--        WHERE mno = #{mno}-->
+<!--    </delete> -->
+
+    <update id="deleteMember" parameterType="long">
+        UPDATE member
+        SET
+            status = 'n',
+            modify_date = now()
+        WHERE mno = #{mno}
+    </update>
+
+    <insert id="insertAuth"  parameterType="com.finns.member.dto.Auth">
+        INSERT INTO member_auth(id, authority)
+        VALUES(#{id}, #{authority})
+    </insert>
+
+    <delete id="deleteAuth"  parameterType="com.finns.member.dto.Auth">
+        DELETE FROM  member_auth
+        WHERE id = #{id} AND authority = #{auth}
+    </delete>
 </mapper>
