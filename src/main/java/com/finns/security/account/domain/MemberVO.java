@@ -17,9 +17,10 @@ public class MemberVO {
     private int user_no;
     private String username;
     private String password;
-    private String birth;
-    private String mbti_no;
-    private String imgurl;
+    private Date birth;
+    private String mbti_name;
+    private String img_url;
+    private Date renew_time;
 
     private List<AuthVO> authList;
 

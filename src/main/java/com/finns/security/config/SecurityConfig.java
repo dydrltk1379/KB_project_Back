@@ -25,6 +25,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -36,6 +37,7 @@ import org.springframework.web.filter.CorsFilter;
 @MapperScan(basePackages = {"com.finns.security.account.mapper"})
 @ComponentScan(basePackages = {"com.finns.security"})
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthenticationErrorFilter authenticationErrorFilter;

@@ -11,6 +11,7 @@
     <typeAliases>
         <package name="com.finns.**.dto" />
         <package name="com.finns.security.account.domain" />
+        <package name="com.finns.follow.dto" />
     </typeAliases>
 
 </configuration>
