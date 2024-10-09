@@ -7,9 +7,10 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class Post {
+public class PostResponseDTO {
     private long postNo;
     private long userNo;
+    private String userName;
     private long cardNo;
     private boolean publicStatus;
     private String category;
