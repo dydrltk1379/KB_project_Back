@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.finns.security.account.domain.MemberVO;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -17,11 +16,9 @@ public class UserInfoDTO {
     private int user_no;
     private String username;
     private String password;
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // 날짜 형식 지정
-    private Date birth;
-    private String mbti_name;
-    private String img_url;
-    private Date renew_time;
+    private String birth;
+    private String mbti_no;
+    private String imgurl;
     List<String> roles;
 
     public static UserInfoDTO of(MemberVO member) {
@@ -35,9 +32,8 @@ public class UserInfoDTO {
                 member.getUsername(),
                 member.getPassword(),
                 member.getBirth(),
-                member.getMbti_name(),
-                member.getImg_url(),
-                member.getRenew_time(),
+                member.getMbti_no(),
+                member.getImgurl(),
                 member.getAuthList().stream()
                         .map(a -> a.getAuthority())
                         .collect(Collectors.toList()) // 변경된 부분
