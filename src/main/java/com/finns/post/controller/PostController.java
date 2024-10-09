@@ -70,4 +70,10 @@ public class PostController {
         postService.reversePublicStatus(no);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/posts/images/distinct")
+    public ResponseEntity<List<Long>> getDistinctPostNos() {
+        List<Long> distinctPostNos = postService.getDistinctPostNos();
+        return ResponseEntity.ok(distinctPostNos);
+    }
 }

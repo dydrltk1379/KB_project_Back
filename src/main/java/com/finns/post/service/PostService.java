@@ -26,8 +26,15 @@ public class PostService {
     private final AmountByCategoryMapper amountByCategoryMapper;
 
     public PostResponseDTO getPost(Long no) {
-        return Optional.ofNullable(postMapper.selectOne(no))
-                        .orElseThrow(NoSuchElementException::new);
+        // 게시글 정보 가져오기
+        PostResponseDTO postResponse = Optional.ofNullable(postMapper.selectOne(no))
+                .orElseThrow(NoSuchElementException::new);
+
+        // 이미지 URL 리스트 가져오기
+        List<String> imgUrls = postMapper.selectImagesByPostNo(no);
+        postResponse.setImgUrls(imgUrls); // 이미지 URL 리스트 설정
+
+        return postResponse;
     }
 
     public List<PostResponseDTO> getPostsByUserAndDateAndIsPublic(PostRequestByDateDTO postRequestByDateDTO) {
@@ -64,5 +71,8 @@ public class PostService {
     public void reversePublicStatus(Long no) {
         postMapper.updatePublicStatus(no);
     }
-
+    // 전체 중복 제거된 post_no 가져오기
+    public List<Long> getDistinctPostNos() {
+        return postMapper.selectDistinctPostNos();
+    }
 }
