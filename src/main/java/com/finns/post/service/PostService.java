@@ -1,11 +1,8 @@
 package com.finns.post.service;
 
 import com.finns.amountByCategory.mapper.AmountByCategoryMapper;
-import com.finns.post.dto.UpdateAmountDTO;
+import com.finns.post.dto.*;
 import com.finns.amountByDate.mapper.AmountByDateMapper;
-import com.finns.post.dto.ChangeRenewStatusDTO;
-import com.finns.post.dto.Post;
-import com.finns.post.dto.PostRequestDTO;
 import com.finns.post.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +25,18 @@ public class PostService {
     private final AmountByDateMapper amountByDateMapper;
     private final AmountByCategoryMapper amountByCategoryMapper;
 
-    public Post getPost(Long no) {
+    public PostResponseDTO getPost(Long no) {
         return Optional.ofNullable(postMapper.selectOne(no))
                         .orElseThrow(NoSuchElementException::new);
     }
 
-    public List<Post> getPostsByUserAndDateAndIsPublic(PostRequestDTO postRequestDTO) {
-        return Optional.ofNullable(postMapper.selectAllByUserAndDateAndIsPublic(postRequestDTO))
+    public List<PostResponseDTO> getPostsByUserAndDateAndIsPublic(PostRequestByDateDTO postRequestByDateDTO) {
+        return Optional.ofNullable(postMapper.selectAllByUserAndDateAndIsPublic(postRequestByDateDTO))
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+    public List<PostResponseDTO> getPostsByUserAndCategoryAndIsPublic(PostRequestByCategoryDTO postRequestByCategoryDTO) {
+        return Optional.ofNullable(postMapper.selectAllByUserAndCategoryAndIsPublic(postRequestByCategoryDTO))
                 .orElseThrow(NoSuchElementException::new);
     }
 
