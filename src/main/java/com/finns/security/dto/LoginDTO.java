@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 
@@ -18,11 +17,9 @@ public class LoginDTO {
     private int user_no;
     private String username;
     private String password;
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // 날짜 형식 지정
-    private Date birth;
-    private String mbti_name;
-    private String img_url;
-    private Date renew_time;
+    private String birth;
+    private String mbti_no;
+    private String imgurl;
 
     public static LoginDTO of(HttpServletRequest request) throws AuthenticationException {
         ObjectMapper om = new ObjectMapper();
