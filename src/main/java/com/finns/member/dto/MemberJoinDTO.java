@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.finns.security.account.domain.MemberVO;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -18,9 +19,11 @@ public class MemberJoinDTO {
     private int user_no;
     private String username;
     private String password;
-    private String birth;
-    private String mbti_no;
-    private String imgurl;
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // 날짜 형식 지정
+    private Date birth;
+    private String mbti_name;
+    private String img_url;
+    private Date renew_time;
 
     MultipartFile avatar;
 
@@ -28,6 +31,9 @@ public class MemberJoinDTO {
         return MemberVO.builder()
                 .username(username)
                 .password(password)
+                .birth(birth)
+                .mbti_name(mbti_name)
+                .renew_time(renew_time)
                 .build();
     }
 }

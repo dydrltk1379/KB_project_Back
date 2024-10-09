@@ -4,42 +4,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.finns.follow.mapper.FollowMapper">
 
-    <!-- Result mapping for Follow -->
-    <resultMap id="FollowResultMap" type="com.finns.follow.dto.FollowDTO">
-        <id property="user_no" column="user_no"/>
-        <id property="to_user_no" column="to_user_no"/>
-    </resultMap>
-
     <!-- Insert a new follow relationship -->
-    <insert id="insertFollow">
-        INSERT INTO follow (user_no, to_user_no)
+    <insert id="insertFollow" parameterType="com.finns.follow.dto.FollowDTO">
+        INSERT INTO follow_info (user_no, to_user_no)
         VALUES (#{user_no}, #{to_user_no})
     </insert>
 
     <!-- Delete a follow relationship -->
-    <delete id="deleteFollow">
-        DELETE FROM follow
+    <delete id="deleteFollow" parameterType="com.finns.follow.dto.FollowDTO">
+        DELETE FROM follow_info
         WHERE user_no = #{user_no} AND to_user_no = #{to_user_no}
     </delete>
 
     <!-- Get all followings of a specific user -->
-    <select id="selectFollowingByUserNo" resultMap="FollowResultMap">
-        SELECT user_no, to_user_no
-        FROM follow
+    <select id="selectFollowingList" resultType="Integer">
+        SELECT to_user_no
+        FROM follow_info
         WHERE user_no = #{user_no}
     </select>
 
     <!-- Get all followers of a specific user -->
-    <select id="selectFollowersByUserNo" resultMap="FollowResultMap">
-        SELECT user_no, to_user_no
-        FROM follow
+    <select id="selectFollowerList" resultType="Integer">
+        SELECT user_no
+        FROM follow_info
         WHERE to_user_no = #{user_no}
     </select>
 
     <!-- Check if a follow relationship exists -->
     <select id="checkFollowExists" parameterType="com.finns.follow.dto.FollowDTO" resultType="int">
         SELECT COUNT(*)
-        FROM follow
+        FROM follow_info
         WHERE user_no = #{user_no} AND to_user_no = #{to_user_no}
     </select>
 

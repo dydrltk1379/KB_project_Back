@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.finns.**"})
+@ComponentScan(basePackages = {"com.finns.**","com.finns.follow.service"})
 public class ServletConfig  implements WebMvcConfigurer {
 
     @Override

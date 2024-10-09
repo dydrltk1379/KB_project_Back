@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/follow")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173") // 클라이언트의 도메인을 허용
 public class FollowController {
 
     private final FollowService followService;
@@ -20,7 +20,7 @@ public class FollowController {
      * @param followDTO 팔로우 정보
      * @return 성공 메시지
      */
-    @PostMapping
+    @PostMapping("/follow")
     public ResponseEntity<String> follow(@RequestBody FollowDTO followDTO) {
         followService.follow(followDTO);
         return ResponseEntity.ok("Followed successfully");
@@ -31,9 +31,9 @@ public class FollowController {
      * @param followDTO 팔로우 정보
      * @return 성공 메시지
      */
-    @DeleteMapping
+    @DeleteMapping("/unfollow")
     public ResponseEntity<String> unfollow(@RequestBody FollowDTO followDTO) {
-        followService.unfollow(followDTO);
+        followService.unFollow(followDTO);
         return ResponseEntity.ok("Unfollowed successfully");
     }
 
