@@ -4,6 +4,7 @@ import com.finns.amountByCategory.mapper.AmountByCategoryMapper;
 import com.finns.post.dto.*;
 import com.finns.amountByDate.mapper.AmountByDateMapper;
 import com.finns.post.mapper.PostMapper;
+import com.finns.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.PropertySource;
@@ -24,6 +25,7 @@ public class PostService {
     private final PostMapper postMapper;
     private final AmountByDateMapper amountByDateMapper;
     private final AmountByCategoryMapper amountByCategoryMapper;
+    private final UserMapper userMapper;
 
     public PostResponseDTO getPost(Long no) {
         return Optional.ofNullable(postMapper.selectOne(no))
@@ -53,6 +55,9 @@ public class PostService {
 
         // 3. renew_status 업데이트
         postMapper.updateRenewStatusByUser(changeRenewStatusDTO);
+
+        // 4. user의 renew_time 업데이트
+        userMapper.updateRenewTime(changeRenewStatusDTO);
     }
 
     public Long getCountByUser(Long userNo) {
