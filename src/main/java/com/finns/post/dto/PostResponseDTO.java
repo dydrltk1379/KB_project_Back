@@ -2,6 +2,8 @@ package com.finns.post.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,4 +23,5 @@ public class PostResponseDTO {
     private long greatCount;
     private long stupidCount;
     private boolean renewStatus;
+    private List<String> imgUrls;
 }

@@ -26,4 +26,14 @@ public interface PostMapper {
     long updateCount(ChangeCountDTO changeCountDTO);
     long updatePost(Post post);     // 공개 여부, 갱신 여부, 메모에 대해서만 update할 수 있으므로 분리?
 
+    List<Long> selectDistinctPostNos();
+
+    List<String> selectImagesByPostNo(Long no);
+
+    // 게시글의 great_count 증가 메서드
+    void incrementGreatCount(Long postNo);
+
+    // 게시글의 stupid_count 증가 메서드
+    void incrementStupidCount(Long postNo);
+
 }
