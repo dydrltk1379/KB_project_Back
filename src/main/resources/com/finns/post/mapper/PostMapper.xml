@@ -8,7 +8,7 @@
     <select id="selectOne" parameterType="long" resultType="com.finns.post.dto.PostResponseDTO">
         SELECT DISTINCT
             p.post_no, p.user_no, p.card_no, p.public_status, p.category, p.memo, p.amount, p.place, p.transaction_date,
-            p.great_count, p.stupid_count, p.renew_status, u.username
+            p.great_count, p.stupid_count, p.renew_status, u.username, u.img_url as user_img_url
         FROM post p
         LEFT JOIN user u ON p.user_no = u.user_no
         WHERE p.post_no = #{no}
