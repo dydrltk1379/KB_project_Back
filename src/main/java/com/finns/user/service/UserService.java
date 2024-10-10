@@ -3,8 +3,7 @@ package com.finns.user.service;
 import com.finns.Mbti;
 import com.finns.amountByCategory.dto.AmountByCategory;
 import com.finns.amountByCategory.mapper.AmountByCategoryMapper;
-import com.finns.user.dto.SetMbtiDTO;
-import com.finns.user.dto.User;
+import com.finns.user.dto.*;
 import com.finns.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +11,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -28,6 +29,16 @@ public class UserService {
 
     public User getUser(Long userNo) {
         return Optional.ofNullable(userMapper.selectOne(userNo))
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+    public List<UserTop3DTO> getTop3ForAmountByDate(YearAndMonthDTO yearAndMonthDTO) {
+        return Optional.ofNullable(userMapper.selectTop3ForAmountByDate(yearAndMonthDTO))
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+    public List<UserRecommendResponseDTO> getRecommend5ByMbti(UserRecommendRequestDTO userRecommendRequestDTO) {
+        return Optional.ofNullable(userMapper.selectRecommend5ByMbti(userRecommendRequestDTO))
                 .orElseThrow(NoSuchElementException::new);
     }
 
