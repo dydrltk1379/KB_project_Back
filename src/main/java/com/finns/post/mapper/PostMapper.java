@@ -30,4 +30,10 @@ public interface PostMapper {
 
     List<String> selectImagesByPostNo(Long no);
 
+    // 게시글의 great_count 증가 메서드
+    void incrementGreatCount(Long postNo);
+
+    // 게시글의 stupid_count 증가 메서드
+    void incrementStupidCount(Long postNo);
+
 }

@@ -90,4 +90,18 @@
         FROM post_img
         WHERE post_no = #{no}
     </select>
+
+    <!-- 게시글의 great_count를 증가시키는 쿼리 -->
+    <update id="incrementGreatCount" parameterType="long">
+        UPDATE post
+        SET great_count = great_count + 1
+        WHERE post_no = #{postNo}
+    </update>
+
+    <!-- 게시글의 stupid_count를 증가시키는 쿼리 -->
+    <update id="incrementStupidCount" parameterType="long">
+        UPDATE post
+        SET stupid_count = stupid_count + 1
+        WHERE post_no = #{postNo}
+    </update>
 </mapper>
