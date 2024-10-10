@@ -1,5 +1,6 @@
 package com.finns.finance.controller;
 
+import com.finns.finance.dto.Finance;
 import com.finns.finance.dto.FinanceDTO;
 import com.finns.finance.service.FinanceService;
 import io.swagger.annotations.Api;
@@ -32,5 +33,10 @@ public class FinanceController {
             return ResponseEntity.badRequest()
                     .body(null);
         }
+    }
+    // 특정 금융 상품 조회 API
+    @GetMapping("/product/no/{financeProductNo}")
+    public FinanceDTO getFinanceProduct(@PathVariable("financeProductNo") Long financeProductNo) {
+        return financeService.getinstallList(financeProductNo);
     }
 }
