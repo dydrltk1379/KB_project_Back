@@ -52,10 +52,6 @@ public class PostController {
         ChangeRenewStatusDTO changeRenewStatusDTO = new ChangeRenewStatusDTO(userNo, now);
         postService.updateRenewStatusAndAmount(changeRenewStatusDTO);
 
-        // user의 renew_time을 변수 now로 업데이트 해줘야함
-        // user쪽에서 구현해서 userService로 동작시키자!
-
-
         return ResponseEntity.ok().build();
     }
 
