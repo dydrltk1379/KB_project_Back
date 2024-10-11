@@ -4,9 +4,9 @@
 <mapper namespace="com.finns.greatOrStupid.mapper.GreatOrStupidMapper">
 
     <!-- 데이터가 없을때 값을 insert -->
-    <insert id="insert" parameterType="com.finns.greatOrStupid.dto.GreatOrStupid">
+    <insert id="insert" parameterType="com.finns.greatOrStupid.dto.UpdateGreatOrStupidRequestDTO">
         INSERT INTO great_or_stupid (user_no, post_no, isGreat)
-        VALUES (#{userNo}, #{postNo}, #{isGreat})
+        VALUES (#{userNo}, #{postNo}, #{greatOrStupid})
     </insert>
 
     <!-- isGreat 값이 false일때 true로 업데이트 -->
@@ -23,7 +23,7 @@
     </delete>
 
     <!-- 사용자 번호와 게시물 번호에 따른 isGreat 값을 조회하는 쿼리 -->
-    <select id="findByUserNoAndPostNo" resultType="boolean">
+    <select id="findByUserNoAndPostNo" resultType="Boolean">
         SELECT isGreat
         FROM great_or_stupid
         WHERE user_no = #{userNo} AND post_no = #{postNo}
