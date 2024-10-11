@@ -2,6 +2,7 @@ package com.finns.follow.controller;
 
 import com.finns.follow.dto.FollowDTO;
 import com.finns.follow.service.FollowService;
+import com.finns.member.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,8 +45,8 @@ public class FollowController {
      * @return 팔로잉 사용자 번호 목록
      */
     @GetMapping("/following/{user_no}")
-    public ResponseEntity<List<Integer>> getFollowingList(@PathVariable int user_no) {
-        List<Integer> followingList = followService.getFollowingList(user_no);
+    public ResponseEntity<List<MemberDTO>> getFollowingList(@PathVariable int user_no) {
+        List<MemberDTO> followingList = followService.getFollowingList(user_no);
         return ResponseEntity.ok(followingList);
     }
 
@@ -55,8 +56,8 @@ public class FollowController {
      * @return 팔로워 사용자 번호 목록
      */
     @GetMapping("/followers/{user_no}")
-    public ResponseEntity<List<Integer>> getFollowerList(@PathVariable int user_no) {
-        List<Integer> followerList = followService.getFollowerList(user_no);
+    public ResponseEntity<List<MemberDTO>> getFollowerList(@PathVariable int user_no) {
+        List<MemberDTO> followerList = followService.getFollowerList(user_no);
         return ResponseEntity.ok(followerList);
     }
 }

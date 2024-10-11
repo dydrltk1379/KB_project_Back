@@ -1,6 +1,7 @@
 package com.finns.follow.mapper;
 
 import com.finns.follow.dto.FollowDTO;
+import com.finns.member.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -25,12 +26,12 @@ public interface FollowMapper {
      * @param user_no 사용자 번호
      * @return 팔로잉 사용자 번호 목록
      */
-    List<Integer> selectFollowingByUserNo(int user_no);
+    List<MemberDTO> selectFollowingByUserNo(int user_no);
 
     /**
      * 특정 사용자를 팔로우하는 사용자 목록을 가져온다.
      * @param user_no 사용자 번호
      * @return 팔로워 사용자 번호 목록
      */
-    List<Integer> selectFollowersByUserNo(int user_no);
+    List<MemberDTO> selectFollowersByUserNo(int user_no);
 }
