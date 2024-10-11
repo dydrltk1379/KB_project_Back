@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.finns.finance.mapper.FinanceMapper">
+
+    <!-- 예금 상품 리스트 조회 -->
+    <select id="getDepositProducts" resultType="com.finns.finance.dto.FinanceDTO">
+        SELECT fp.finance_product_no, fp.kor_co_nm, fc.img_url, fp.finance_product_type,
+               fp.fin_prdt_nm, fp.intr_rate2, fp.intr_rate, fp.join_member,
+               fp.join_way, fp.save_trm, fp.intr_rate_type_nm, fp.spcl_cnd,
+               fp.mtrt_int
+        FROM finance_product fp
+        JOIN finance_company fc
+          ON fp.kor_co_nm = fc.kor_co_nm
+        WHERE fp.finance_product_type = '01';
+    </select>
+
+    <!-- 적금 상품 리스트 조회 -->
+    <select id="getinstallProducts" resultType="com.finns.finance.dto.FinanceDTO">
+        SELECT fp.finance_product_no, fp.kor_co_nm, fc.img_url, fp.finance_product_type,
+               fp.fin_prdt_nm, fp.intr_rate2, fp.intr_rate, fp.join_member,
+               fp.join_way, fp.save_trm, fp.intr_rate_type_nm, fp.spcl_cnd,
+               fp.mtrt_int
+        FROM finance_product fp
+                 JOIN finance_company fc
+                      ON fp.kor_co_nm = fc.kor_co_nm
+        WHERE fp.finance_product_type = '02';
+    </select>
+
+    <!-- 특정 금융 상품 조회 -->
+    <select id="selectOneProduct" resultType="com.finns.finance.dto.FinanceDTO">
+        SELECT fp.finance_product_no, fp.kor_co_nm, fc.img_url, fp.finance_product_type,
+               fp.fin_prdt_nm, fp.intr_rate2, fp.intr_rate, fp.join_member,
+               fp.join_way, fp.save_trm, fp.intr_rate_type_nm, fp.spcl_cnd,
+               fp.mtrt_int
+        FROM finance_product fp
+                 JOIN finance_company fc
+                      ON fp.kor_co_nm = fc.kor_co_nm
+        WHERE finance_product_no = #{financeProductNo}
+    </select>
+
+</mapper>

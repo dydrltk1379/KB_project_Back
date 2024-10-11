@@ -13,6 +13,7 @@ public class PostResponseDTO {
     private long postNo;
     private long userNo;
     private String userName;
+    private String userImgUrl;
     private long cardNo;
     private boolean publicStatus;
     private String category;

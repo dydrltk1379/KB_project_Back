@@ -10,6 +10,27 @@
         where user_no = #{userNo}
     </select>
 
+    <select id="selectTop3ForAmountByDate" parameterType="com.finns.user.dto.YearAndMonthDTO" resultType="com.finns.user.dto.UserTop3DTO">
+        SELECT u.user_no, u.username, u.img_url, SUM(p.amount) AS total_amount
+        FROM user u
+                 JOIN post p ON u.user_no = p.user_no
+        WHERE p.renew_status = true
+            AND YEAR(p.transaction_date) = #{year}
+            AND MONTH(p.transaction_date) = #{month}
+        GROUP BY u.user_no
+        ORDER BY total_amount DESC
+            LIMIT 3
+    </select>
+
+    <select id="selectRecommend5ByMbti" parameterType="com.finns.user.dto.UserRecommendRequestDTO" resultType="com.finns.user.dto.UserRecommendResponseDTO">
+        SELECT user_no, username, img_url
+        FROM user
+        WHERE mbti_name = #{mbtiName} AND user_no != #{userNo}
+        ORDER BY renew_time DESC
+            LIMIT 5
+    </select>
+
+
     <update id="updateRenewTime" parameterType="com.finns.post.dto.ChangeRenewStatusDTO">
         update user
         set renew_time = #{now}
