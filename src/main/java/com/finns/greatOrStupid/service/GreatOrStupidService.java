@@ -36,8 +36,7 @@ public class GreatOrStupidService {
             // 현재 데이터가 없을 때 (즉, 처음으로 좋아요 또는 싫어요를 누를 때)
             // isLike가 true면 isGreat를 true로, false면 isGreat를 false로 삽입
 
-            GreatOrStupid newEntry = new GreatOrStupid(userNo, postNo, isGreat);
-            greatOrStupidMapper.insert(newEntry);
+            greatOrStupidMapper.insert(updateGreatOrStupidRequestDTO);
 
             if (isGreat) {
                 postMapper.incrementGreatCount(postNo); // 좋아요 카운트 증가
@@ -48,11 +47,11 @@ public class GreatOrStupidService {
             postMapper.decrementStupidCount(postNo); // 싫어요 카운트 감소
 
             if(isGreat){
-                // isGreat가 false였고, 좋아요 버튼을 누른 경우
+                // 싫어요 -> 좋아요
                 greatOrStupidMapper.updateIsGreat(userNo, postNo, true);
                 postMapper.incrementGreatCount(postNo); // 좋아요 카운트 증가
             } else{
-                // isGreat가 false였고, 싫어요 버튼을 다시 눌렀을 경우 싫어요 삭제
+                // 싫어요 -> X
                 greatOrStupidMapper.deleteByUserNoAndPostNo(userNo, postNo);
             }
         }
@@ -60,10 +59,10 @@ public class GreatOrStupidService {
             postMapper.decrementGreatCount(postNo); // 좋아요 카운트 감소
 
             if(isGreat){
-                // isGreat가 true였고, 좋아요 버튼을 다시 눌렀을 경우 좋아요 삭제
+                // 좋아요 -> X
                 greatOrStupidMapper.deleteByUserNoAndPostNo(userNo, postNo);
             } else {
-                // isGreat가 true였고, 싫어요 버튼을 누른 경우
+                // 좋아요 -> 싫어요
                 greatOrStupidMapper.updateIsGreat(userNo, postNo, false);
                 postMapper.incrementStupidCount(postNo); // 싫어요 카운트 증가
             }
