@@ -1,39 +1,72 @@
 package com.finns.greatOrStupid.service;
 
 import com.finns.greatOrStupid.dto.GreatOrStupid;
+import com.finns.greatOrStupid.dto.UpdateGreatOrStupidRequestDTO;
+import com.finns.greatOrStupid.dto.UpdateGreatOrStupidResponseDTO;
 import com.finns.greatOrStupid.mapper.GreatOrStupidMapper;
 import com.finns.post.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
+@PropertySource({"classpath:/application.properties"})
+@Transactional(readOnly = true)
 public class GreatOrStupidService {
 
     private final GreatOrStupidMapper greatOrStupidMapper;
     private final PostMapper postMapper;
 
-    public void toggleGreat(Long userNo, Long postNo) {
+    @Transactional
+    public void toggleGreat(UpdateGreatOrStupidRequestDTO updateGreatOrStupidRequestDTO) {
+        Long userNo = updateGreatOrStupidRequestDTO.getUserNo();
+        Long postNo = updateGreatOrStupidRequestDTO.getPostNo();
+        boolean isGreat = updateGreatOrStupidRequestDTO.isGreatOrStupid();
+
         // 현재 isGreat 값을 조회
         Boolean currentIsGreat = greatOrStupidMapper.findByUserNoAndPostNo(userNo, postNo);
-
-        // 현재 isGreat가 null인 경우, 기본값을 false로 설정
         if (currentIsGreat == null) {
-            currentIsGreat = false;
+            // 현재 데이터가 없을 때 (즉, 처음으로 좋아요 또는 싫어요를 누를 때)
+            // isLike가 true면 isGreat를 true로, false면 isGreat를 false로 삽입
+
+            GreatOrStupid newEntry = new GreatOrStupid(userNo, postNo, isGreat);
+            greatOrStupidMapper.insert(newEntry);
+
+            if (isGreat) {
+                postMapper.incrementGreatCount(postNo); // 좋아요 카운트 증가
+            } else {
+                postMapper.incrementStupidCount(postNo); // 싫어요 카운트 증가
+            }
+        } else if (!currentIsGreat) {
+            postMapper.decrementStupidCount(postNo); // 싫어요 카운트 감소
+
+            if(isGreat){
+                // isGreat가 false였고, 좋아요 버튼을 누른 경우
+                greatOrStupidMapper.updateIsGreat(userNo, postNo, true);
+                postMapper.incrementGreatCount(postNo); // 좋아요 카운트 증가
+            } else{
+                // isGreat가 false였고, 싫어요 버튼을 다시 눌렀을 경우 싫어요 삭제
+                greatOrStupidMapper.deleteByUserNoAndPostNo(userNo, postNo);
+            }
         }
+        else {
+            postMapper.decrementGreatCount(postNo); // 좋아요 카운트 감소
 
-        // isGreat 값을 토글
-        Boolean newIsGreat = !currentIsGreat;
-
-        // GreatOrStupid 테이블에 삽입 또는 업데이트
-        GreatOrStupid greatOrStupidDTO = new GreatOrStupid(userNo, postNo, newIsGreat);
-        greatOrStupidMapper.insertOrUpdate(greatOrStupidDTO);
-
-        // isGreat 값에 따라 각 카운트를 증가
-        if (newIsGreat) {
-            postMapper.incrementGreatCount(postNo); // true일 경우 great_count 증가
-        } else {
-            postMapper.incrementStupidCount(postNo); // false일 경우 stupid_count 증가
+            if(isGreat){
+                // isGreat가 true였고, 좋아요 버튼을 다시 눌렀을 경우 좋아요 삭제
+                greatOrStupidMapper.deleteByUserNoAndPostNo(userNo, postNo);
+            } else {
+                // isGreat가 true였고, 싫어요 버튼을 누른 경우
+                greatOrStupidMapper.updateIsGreat(userNo, postNo, false);
+                postMapper.incrementStupidCount(postNo); // 싫어요 카운트 증가
+            }
         }
     }
 

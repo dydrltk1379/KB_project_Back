@@ -80,4 +80,5 @@ public class PostService {
     public List<Long> getDistinctPostNos() {
         return postMapper.selectDistinctPostNos();
     }
+
 }

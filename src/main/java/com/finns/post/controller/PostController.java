@@ -62,7 +62,7 @@ public class PostController {
     }
 
     @PutMapping("posts/{no}/togglePublicStatus")
-    public ResponseEntity<?> togglePublicStatus(@PathVariable("no") Long no) {
+    public ResponseEntity<Long> togglePublicStatus(@PathVariable("no") Long no) {
         postService.reversePublicStatus(no);
         return ResponseEntity.ok().build();
     }

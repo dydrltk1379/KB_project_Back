@@ -104,4 +104,16 @@
         SET stupid_count = stupid_count + 1
         WHERE post_no = #{postNo}
     </update>
+
+    <update id="decrementGreatCount" parameterType="long">
+        UPDATE post
+        SET great_count = great_count - 1
+        WHERE post_no = #{postNo}
+    </update>
+
+    <update id="decrementStupidCount" parameterType="long">
+        UPDATE post
+        SET stupid_count = stupid_count - 1
+        WHERE post_no = #{postNo}
+    </update>
 </mapper>
