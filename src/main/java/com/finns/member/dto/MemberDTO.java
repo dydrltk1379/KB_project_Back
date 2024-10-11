@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.finns.security.account.domain.MemberVO;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -18,9 +19,12 @@ public class MemberDTO {
     private int user_no;
     private String username;
     private String password;
-    private String birth;
-    private String mbti_no;
-    private String imgurl;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birth;
+    private String mbti_name;
+    private String img_url;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date renew_time;
 
     MultipartFile avatar;
 
@@ -31,8 +35,8 @@ public class MemberDTO {
                 .username(m.getUsername())
                 .password(m.getPassword())
                 .birth(m.getBirth())
-                .mbti_no(m.getMbti_no())
-                .imgurl(m.getImgurl())
+                .mbti_name(m.getMbti_name())
+                .img_url(m.getImg_url())
                 .authList(m.getAuthList().stream().map(a->a.getAuthority()).toList())
                 .build();
     }
@@ -42,8 +46,8 @@ public class MemberDTO {
                 .username(username)
                 .password(password)
                 .birth(birth)
-                .mbti_no(mbti_no)
-                .imgurl(imgurl)
+                .mbti_name(mbti_name)
+                .img_url(img_url)
                 .build();
     }
 }

@@ -17,9 +17,9 @@ public class LoginDTO {
     private int user_no;
     private String username;
     private String password;
-    private String birth;
-    private String mbti_no;
-    private String imgurl;
+    private Date birth;
+    private String mbti_name;
+    private String img_url;
 
     public static LoginDTO of(HttpServletRequest request) throws AuthenticationException {
         ObjectMapper om = new ObjectMapper();
