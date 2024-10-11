@@ -43,6 +43,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/v2/api-docs")
                 .addResourceLocations("classpath:/META-INF/resources/");
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // 모든 경로에 대해 CORS 설정
@@ -51,5 +52,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedHeaders("*") // 모든 헤더 허용
                 .allowCredentials(true); // 자격 증명 허용 (필요한 경우)
     }
+
 }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.finns.security.account.domain.MemberVO;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -16,9 +17,12 @@ public class MemberUpdateDTO {
     private String username;
     private String password; // 현재 비밀번호
     private String newPassword; // 새로운 비밀번호 (네이밍 변경)
-    private String birth;
-    private String mbti_no;
-    private String imgurl;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birth;
+    private String mbti_name;
+    private String img_url;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date renew_time;
 
     private MultipartFile avatar; // 접근 제어자 추가
 
@@ -32,8 +36,8 @@ public class MemberUpdateDTO {
                 .username(username)
                 .password(finalPassword) // 암호화된 비밀번호 사용 또는 기존 비밀번호 유지
                 .birth(birth)
-                .mbti_no(mbti_no)
-                .imgurl(imgurl)
+                .mbti_name(mbti_name)
+                .img_url(img_url)
                 .authList(null) // 권한 정보는 필요에 따라 설정
                 .build();
     }

@@ -16,8 +16,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Api(value = "FinanceController", tags = "금융상품 정보")
-@PropertySource({"classpath:/application.properties"})
-//@CrossOrigin(origins = "http://localhost:5173")
 public class FinanceController {
 
     private final FinanceService financeService;
