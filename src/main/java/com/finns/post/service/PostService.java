@@ -81,4 +81,7 @@ public class PostService {
         return postMapper.selectDistinctPostNos();
     }
 
+    public List<PostResponseDTO> getTop3PostsByGreatCount() {
+        return postMapper.getTop3PostsByGreatCount();
+    }
 }

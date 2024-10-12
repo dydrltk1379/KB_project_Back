@@ -61,7 +61,7 @@ public class PostController {
         return ResponseEntity.ok(count);
     }
 
-    @PutMapping("posts/{no}/togglePublicStatus")
+    @PutMapping("/posts/{no}/togglePublicStatus")
     public ResponseEntity<Long> togglePublicStatus(@PathVariable("no") Long no) {
         postService.reversePublicStatus(no);
         return ResponseEntity.ok().build();
@@ -71,5 +71,10 @@ public class PostController {
     public ResponseEntity<List<Long>> getDistinctPostNos() {
         List<Long> distinctPostNos = postService.getDistinctPostNos();
         return ResponseEntity.ok(distinctPostNos);
+    }
+
+    @GetMapping("/posts/top3")
+    public List<PostResponseDTO> getTop3PostsByGreatCount() {
+        return postService.getTop3PostsByGreatCount();
     }
 }
