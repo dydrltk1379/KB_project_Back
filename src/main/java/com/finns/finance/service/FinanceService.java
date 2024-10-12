@@ -1,5 +1,6 @@
 package com.finns.finance.service;
 
+import com.finns.finance.dto.CardDTO;
 import com.finns.finance.dto.Finance;
 import com.finns.finance.dto.FinanceDTO;
 import com.finns.finance.mapper.FinanceMapper;
@@ -32,5 +33,9 @@ public class FinanceService {
     // 금융상품 한개 검색
     public FinanceDTO getinstallList(Long no) {return financeMapper.selectOneProduct(no);}
 
-    // 금융상품 로고 url 검색
+    // 카드 상품 리스트 반환
+    public List<CardDTO> getCardList() {return financeMapper.getCardProducts();}
+
+    // 카드 상품 한개 검색
+    public CardDTO getCardList(Long no) {return financeMapper.selectOneCard(no);}
 }
