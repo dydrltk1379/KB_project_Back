@@ -67,7 +67,7 @@
     <select id="selectCountByUser" resultType="java.lang.Long">
         SELECT COUNT(*)
         FROM post
-        WHERE user_no = #{userNo}
+        WHERE user_no = #{userNo} AND renew_status = true
     </select>
 
     <update id="updatePublicStatus">
@@ -116,4 +116,12 @@
         SET stupid_count = stupid_count - 1
         WHERE post_no = #{postNo}
     </update>
+
+
+    <select id="getTop3PostsByGreatCount" resultType="com.finns.post.dto.PostResponseDTO">
+        SELECT *
+        FROM post
+        ORDER BY great_count DESC
+            LIMIT 3
+    </select>
 </mapper>

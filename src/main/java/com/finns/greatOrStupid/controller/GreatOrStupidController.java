@@ -1,7 +1,6 @@
 package com.finns.greatOrStupid.controller;
 
 import com.finns.greatOrStupid.dto.UpdateGreatOrStupidRequestDTO;
-import com.finns.greatOrStupid.dto.UpdateGreatOrStupidResponseDTO;
 import com.finns.greatOrStupid.service.GreatOrStupidService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
