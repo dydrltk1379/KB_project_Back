@@ -67,7 +67,7 @@
     <select id="selectCountByUser" resultType="java.lang.Long">
         SELECT COUNT(*)
         FROM post
-        WHERE user_no = #{userNo}
+        WHERE user_no = #{userNo} AND renew_status = true
     </select>
 
     <update id="updatePublicStatus">

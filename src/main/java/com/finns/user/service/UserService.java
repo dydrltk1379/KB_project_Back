@@ -3,6 +3,7 @@ package com.finns.user.service;
 import com.finns.Mbti;
 import com.finns.amountByCategory.dto.AmountByCategory;
 import com.finns.amountByCategory.mapper.AmountByCategoryMapper;
+import com.finns.amountByCategory.service.AmountByCategoryService;
 import com.finns.user.dto.*;
 import com.finns.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserMapper userMapper;
-    private final AmountByCategoryMapper amountByCategoryMapper;
+    private final AmountByCategoryService amountByCategoryService;
 
     public User getUser(Long userNo) {
         return Optional.ofNullable(userMapper.selectOne(userNo))
@@ -44,19 +45,7 @@ public class UserService {
 
     @Transactional
     public void setMbtiByCategory(Long userNo) {
-        List<AmountByCategory> amountByCategories = amountByCategoryMapper.selectAllByUser(userNo);
-
-        String topCategory = null;
-        double maxPoint = 0;
-        for(AmountByCategory amountByCategory : amountByCategories) {
-            double point = Mbti.calculatePoints(amountByCategory.getCategory(), amountByCategory.getAmount());
-
-            if(maxPoint < point){
-                maxPoint = point;
-                topCategory = amountByCategory.getCategory();
-            }
-        }
-
+        String topCategory = amountByCategoryService.calculateTopCategory(userNo);
         String mbtiName = Mbti.getMbtiNameByCategory(topCategory);
         SetMbtiDTO setMbtiDTO = new SetMbtiDTO(userNo, mbtiName);
         userMapper.updateMbti(setMbtiDTO);
