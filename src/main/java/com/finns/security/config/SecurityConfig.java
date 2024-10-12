@@ -25,7 +25,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -37,7 +36,6 @@ import org.springframework.web.filter.CorsFilter;
 @MapperScan(basePackages = {"com.finns.security.account.mapper"})
 @ComponentScan(basePackages = {"com.finns.security"})
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthenticationErrorFilter authenticationErrorFilter;
@@ -166,6 +164,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOriginPattern("*");
+        config.addAllowedOrigin("http://localhost:5173"); // Vue 앱 도메인 허용
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);

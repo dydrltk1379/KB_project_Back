@@ -17,10 +17,11 @@ public class UserInfoDTO {
     private int user_no;
     private String username;
     private String password;
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // 날짜 형식 지정
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
     private String mbti_name;
     private String img_url;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date renew_time;
     List<String> roles;
 

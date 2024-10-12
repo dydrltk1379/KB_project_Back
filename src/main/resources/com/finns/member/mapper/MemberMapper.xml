@@ -16,7 +16,7 @@
         <result property="birth" column="birth" />
         <result property="mbti_name" column="mbti_name" />
         <result property="img_url" column="img_url" />
-        <result property="renew_time" column="renew_time"/>
+        <result property="renew_time" column="renew_time" />
         <collection property="authList" resultMap="authMap" />
     </resultMap>
     <select id="get" resultMap="memberMap">
@@ -31,8 +31,8 @@
         SELECT * FROM user WHERE username = #{username}
     </select>
     <insert id="insert">
-        INSERT INTO user(user_no , username , password, birth , mbti_name,img_url , renew_time)
-        VALUES(default,#{username}, #{password}, #{birth},#{mbti_name} ,#{img_url} , now())
+        INSERT INTO user(user_no , username , password, birth , mbti_name,img_url,renew_time)
+        VALUES(default,#{username}, #{password}, #{birth},#{mbti_name} ,#{img_url},now())
     </insert>
     <insert id="insertAuth">
         INSERT INTO user_auth(username, authority)
@@ -42,15 +42,14 @@
     <update id="update">
         UPDATE user
         SET
-            update_date = now()
+            renew_time = now()
         WHERE username =#{username}
     </update>
 
     <update id="updatePassword">
-        UPDATE user
-        SET
+        UPDATE user        SET
             password = #{newPassword},
-            update_date = now()
+            renew_time = now()
         WHERE username =#{username}
     </update>
 </mapper>

@@ -2,8 +2,6 @@ package com.finns.post.dto;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

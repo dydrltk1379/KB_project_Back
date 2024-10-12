@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource({"classpath:/application.properties"})
-@MapperScan(basePackages  = {"com.finns.****", "com.finns.follow.mapper"})
+@MapperScan(basePackages  = {"com.finns.****"})
 @ComponentScan(basePackages = {"com.finns.****"})
 @Slf4j
 @EnableTransactionManagement

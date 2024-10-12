@@ -19,7 +19,7 @@ public class MemberJoinDTO {
     private int user_no;
     private String username;
     private String password;
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // 날짜 형식 지정
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
     private String mbti_name;
     private String img_url;
@@ -32,8 +32,6 @@ public class MemberJoinDTO {
                 .username(username)
                 .password(password)
                 .birth(birth)
-                .mbti_name(mbti_name)
-                .renew_time(renew_time)
                 .build();
     }
 }

@@ -17,10 +17,11 @@ public class MemberUpdateDTO {
     private String username;
     private String password; // 현재 비밀번호
     private String newPassword; // 새로운 비밀번호 (네이밍 변경)
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // 날짜 형식 지정
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
     private String mbti_name;
     private String img_url;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date renew_time;
 
     private MultipartFile avatar; // 접근 제어자 추가
@@ -37,7 +38,6 @@ public class MemberUpdateDTO {
                 .birth(birth)
                 .mbti_name(mbti_name)
                 .img_url(img_url)
-                .renew_time(renew_time)
                 .authList(null) // 권한 정보는 필요에 따라 설정
                 .build();
     }

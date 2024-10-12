@@ -21,11 +21,11 @@
         <collection property="authList" resultMap="authMap"/>
     </resultMap>
 
-    <select id="get" resultMap="memberMap">
-        SELECT m.user_no,m.username, m.password,m.birth, m.mbti_name, m.img_url , m.renew_time
+    <select id="get" resultMap="memberMap" parameterType="String">
+        SELECT m.user_no, m.username, m.password,m.birth, m.mbti_name, m.img_url , m.renew_time
         FROM
             user m
-                LEFT OUTER JOIN user_auth a
+                LEFT OUTER JOIN user a
                                 ON m.username = a.username
         where m.username = #{username}
     </select>

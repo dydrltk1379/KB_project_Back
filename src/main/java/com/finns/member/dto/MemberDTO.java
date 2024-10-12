@@ -19,10 +19,11 @@ public class MemberDTO {
     private int user_no;
     private String username;
     private String password;
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // 날짜 형식 지정
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
     private String mbti_name;
     private String img_url;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date renew_time;
 
     MultipartFile avatar;
@@ -36,7 +37,6 @@ public class MemberDTO {
                 .birth(m.getBirth())
                 .mbti_name(m.getMbti_name())
                 .img_url(m.getImg_url())
-                .renew_time(m.getRenew_time())
                 .authList(m.getAuthList().stream().map(a->a.getAuthority()).toList())
                 .build();
     }
@@ -48,7 +48,6 @@ public class MemberDTO {
                 .birth(birth)
                 .mbti_name(mbti_name)
                 .img_url(img_url)
-                .renew_time(renew_time)
                 .build();
     }
 }
