@@ -21,5 +21,6 @@ public class FinanceDTO {
     private String intrRateTypeNm; // 이자 계산 방식
     private String spclCnd; // 우대조건
     private String mtrtInt; // 만기후 이자율 // 은행 로고 이미지 힝크
-    private String imgUrl;
+    private String imgUrl; // 은행 로고 이미지
+    private String companyUrl; // 은행사 홈페이지
 }
