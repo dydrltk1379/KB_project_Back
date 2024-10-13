@@ -1,9 +1,6 @@
 package com.finns.post.controller;
 
-import com.finns.post.dto.ChangeRenewStatusDTO;
-import com.finns.post.dto.PostRequestByCategoryDTO;
-import com.finns.post.dto.PostRequestByDateDTO;
-import com.finns.post.dto.PostResponseDTO;
+import com.finns.post.dto.*;
 import com.finns.post.service.PostService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +40,14 @@ public class PostController {
     public ResponseEntity<List<PostResponseDTO>> postsInfoByUserAndCategoryAndIsPublic(@RequestBody PostRequestByCategoryDTO postRequestByCategoryDTO) {
         List<PostResponseDTO> posts = postService.getPostsByUserAndCategoryAndIsPublic(postRequestByCategoryDTO);
         return ResponseEntity.ok(posts);
+    }
+
+    @PutMapping("/posts/{no}/update")
+    public ResponseEntity<?> updatePost(@PathVariable("no") Long no, @RequestBody UpdatePostDetailDTO updatePostDetailDTO) {
+        updatePostDetailDTO.setPostNo(no);
+        postService.updatePostDetail(updatePostDetailDTO);
+
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/users/{no}/renew")

@@ -77,9 +77,11 @@
         WHERE post_no = #{postNo}
     </update>
 
-
-    <update id="updateCount"></update>
-    <update id="updatePost"></update>
+    <update id="updatePost" parameterType="com.finns.post.dto.UpdatePostDetailDTO">
+        UPDATE post
+        SET public_status = #{publicStatus}, category = #{category}, memo = #{memo}
+        WHERE post_no = #{postNo}
+    </update>
 
     <select id="selectDistinctPostNos" resultType="long">
         SELECT DISTINCT post_no

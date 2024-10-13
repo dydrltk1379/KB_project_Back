@@ -22,9 +22,7 @@ public interface PostMapper {
 
     void updatePublicStatus(Long no);
 
-
-    long updateCount(ChangeCountDTO changeCountDTO);
-    long updatePost(Post post);     // 공개 여부, 갱신 여부, 메모에 대해서만 update할 수 있으므로 분리?
+    void updatePost(UpdatePostDetailDTO updatePostDetailDTO);     // 공개 여부, 갱신 여부, 메모에 대해서만 update할 수 있으므로 분리?
 
     List<Long> selectDistinctPostNos();
 
