@@ -15,6 +15,7 @@ public class PostResponseDTO {
     private String userName;
     private String userImgUrl;
     private long cardNo;
+    private String cardName;
     private boolean publicStatus;
     private String category;
     private String memo;
