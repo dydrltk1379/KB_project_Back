@@ -50,6 +50,11 @@ public class PostService {
     }
 
     @Transactional
+    public void updatePostDetail(UpdatePostDetailDTO updatePostDetailDTO) {
+        postMapper.updatePost(updatePostDetailDTO);
+    }
+
+    @Transactional
     public void updateRenewStatusAndAmount(ChangeRenewStatusDTO changeRenewStatusDTO) {
         // 1. 갱신된 post의 date, category, userNo, amount 가져오기
         List<UpdateAmountDTO> updatedPosts = postMapper.selectUpdatedRenewPost(changeRenewStatusDTO);
