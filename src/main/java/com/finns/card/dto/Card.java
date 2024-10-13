@@ -4,19 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Card {
-    private long card_no;
-    private String card_name;
-    private String corp_name;
-    private String img_url;
-    private long ex_l_mth;
-    private String ex_in_for;
-    private String detail_link;
-    private String card_type_no;
-    private String type;
-    private String benefit;
-    private String benefit_detail;
+    private long cardNo;
+    private String cardName;
+    private String corpName;
+    private String imgUrl;
+    private String exLMth;          // 전월실적
+    private String exInFor;       // 연회비
+    private String detailLink;     // 카드 신청 링크
+    private String type;            // 카테고리명
+    private String benefit;         // 요약혜택
+    private String benefitDetail;  // 상세혜택
 }
