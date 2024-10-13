@@ -1,5 +1,6 @@
 package com.finns.finance.service;
 
+import com.finns.finance.dto.CardDTO;
 import com.finns.finance.dto.Finance;
 import com.finns.finance.dto.FinanceCount;
 import com.finns.finance.dto.FinanceDTO;
@@ -51,4 +52,9 @@ public class FinanceService {
     public FinanceCount getTopSavingsProductByUsers() {
         return financeMapper.selectTopSavingsProductByUsers();
     }
+    // 카드 상품 리스트 반환
+    public List<CardDTO> getCardList() {return financeMapper.getCardProducts();}
+
+    // 카드 상품 한개 검색
+    public CardDTO getCardList(Long no) {return financeMapper.selectOneCard(no);}
 }
