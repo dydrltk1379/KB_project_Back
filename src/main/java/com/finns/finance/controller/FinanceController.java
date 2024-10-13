@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Api(value = "FinanceController", tags = "금융상품 정보")
+@CrossOrigin(origins = "http://localhost:5173") // 클라이언트의 도메인을 허용
 public class FinanceController {
 
     private final FinanceService financeService;
