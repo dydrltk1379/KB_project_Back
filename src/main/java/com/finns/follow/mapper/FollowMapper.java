@@ -43,4 +43,7 @@ public interface FollowMapper {
      * @return 팔로우 관계가 존재하면 1, 존재하지 않으면 0
      */
     int checkFollowExists(@Param("user_no") int user_no, @Param("to_user_no") int to_user_no);
+
+    int countFollowers(int user_no);
+    int countFollowing(int user_no);
 }

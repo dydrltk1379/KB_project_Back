@@ -54,4 +54,11 @@
         WHERE user_no = #{user_no} AND to_user_no = #{to_user_no}
     </select>
 
+    <select id="countFollowers" resultType="int">
+        SELECT COUNT(*) FROM follow_info WHERE to_user_no = #{user_no}
+    </select>
+
+    <select id="countFollowing" resultType="int">
+        SELECT COUNT(*) FROM follow_info WHERE user_no = #{user_no}
+    </select>
 </mapper>

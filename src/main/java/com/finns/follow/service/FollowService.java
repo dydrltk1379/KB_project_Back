@@ -1,5 +1,6 @@
 package com.finns.follow.service;
 
+import com.finns.follow.dto.FollowCountDTO;
 import com.finns.follow.dto.FollowDTO;
 import com.finns.follow.exception.AlreadyFollowingException;
 import com.finns.follow.exception.FollowNotFoundException;
@@ -65,7 +66,11 @@ public class FollowService {
                 .following(false) // 기본값을 false로 설정
                 .build();
     }
-
+    public FollowCountDTO getFollowCounts(int user_no) {
+        int followerCount = followMapper.countFollowers(user_no);
+        int followingCount = followMapper.countFollowing(user_no);
+        return new FollowCountDTO(followerCount, followingCount);
+    }
 
 
 //        @Transactional
