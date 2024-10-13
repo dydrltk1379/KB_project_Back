@@ -31,7 +31,7 @@
 
     <!-- 특정 금융 상품 조회 -->
     <select id="selectOneProduct" resultType="com.finns.finance.dto.FinanceDTO">
-        SELECT fp.finance_product_no, fp.kor_co_nm, fc.img_url, fp.finance_product_type,
+        SELECT fp.finance_product_no, fp.kor_co_nm, fc.img_url, fc.company_url, fp.finance_product_type,
                fp.fin_prdt_nm, fp.intr_rate2, fp.intr_rate, fp.join_member,
                fp.join_way, fp.save_trm, fp.intr_rate_type_nm, fp.spcl_cnd,
                fp.mtrt_int
@@ -41,4 +41,34 @@
         WHERE finance_product_no = #{financeProductNo}
     </select>
 
+    <!-- 카드 상품 리스트 조회 -->
+    <select id="getCardProducts" resultType="com.finns.finance.dto.CardDTO">
+        SELECT c.card_no, c.card_name, c.corp_name, c.img_url,
+               c.ex_l_mth, c.ex_in_for, c.detail_link,
+               GROUP_CONCAT(ct.type) AS card_categories,
+               cb.benefit,
+               cb.benefit_detail
+        FROM card c
+                LEFT JOIN card_type ct
+                            ON c.card_no = ct.card_no
+                LEFT JOIN card_benefit cb
+                            ON c.card_no = cb.card_no
+        GROUP BY c.card_no
+    </select>
+
+    <!-- 특정 카드 상품 조회 -->
+    <select id="selectOneCard" resultType="com.finns.finance.dto.CardDTO">
+        SELECT
+        c.card_no, c.card_name, c.corp_name,
+        c.img_url, c.ex_l_mth, c.ex_in_for,
+        c.detail_link,
+        GROUP_CONCAT(ct.type) AS card_categories,
+        cb.benefit,
+        cb.benefit_detail
+        FROM card c
+        LEFT JOIN card_type ct ON c.card_no = ct.card_no
+        LEFT JOIN card_benefit cb ON c.card_no = cb.card_no
+        WHERE c.card_no = #{card_no}
+        GROUP BY c.card_no;
+    </select>
 </mapper>
