@@ -4,7 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.finns.follow.mapper.FollowMapper">
 
-    <!-- Result mapping for Follow -->
+    <resultMap id="memberMap" type="MemberVO">
+        <id property="user_no" column="user_no" />
+        <!--        <result property="user_no" column="user_no" />-->
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="birth" column="birth" />
+        <result property="mbti_name" column="mbti_name" />
+        <result property="img_url" column="img_url" />
+        <result property="renew_time" column="renew_time" />
+    </resultMap>
+
     <resultMap id="FollowResultMap" type="com.finns.follow.dto.FollowDTO">
         <id property="user_no" column="user_no"/>
         <id property="to_user_no" column="to_user_no"/>
@@ -22,24 +32,25 @@
         WHERE user_no = #{user_no} AND to_user_no = #{to_user_no}
     </delete>
 
-    <!-- Get all followings of a specific user -->
-    <select id="selectFollowingByUserNo" resultMap="FollowResultMap">
-        SELECT user_no, to_user_no
-        FROM follow_info
-        WHERE user_no = #{user_no}
+    <!-- 사용자의 팔로잉 목록과 해당하는 유저 정보를 가져옴 -->
+    <select id="selectFollowingByUserNo" resultMap="memberMap">
+        SELECT u.user_no, u.username, u.img_url, u.birth, u.mbti_name, u.renew_time
+        FROM follow_info f
+                 JOIN user u ON f.to_user_no = u.user_no
+        WHERE f.user_no = #{user_no}
     </select>
 
-    <!-- Get all followers of a specific user -->
-    <select id="selectFollowersByUserNo" resultMap="FollowResultMap">
-        SELECT user_no, to_user_no
-        FROM follow_info
-        WHERE to_user_no = #{user_no}
+    <!-- 사용자의 팔로워 목록을 가져옴 (user_no 값만 반환) -->
+    <select id="selectFollowersByUserNo" resultMap="memberMap">
+        SELECT u.user_no, u.username, u.img_url, u.birth, u.mbti_name, u.renew_time
+        FROM follow_info f
+                 JOIN user u ON f.user_no = u.user_no
+        WHERE f.to_user_no = #{user_no}
     </select>
 
-    <!-- Check if a follow relationship exists -->
-    <select id="checkFollowExists" parameterType="com.finns.follow.dto.FollowDTO" resultType="int">
-        SELECT COUNT(*)
-        FROM follow_info
+    <!-- FollowMapper.xml -->
+    <select id="checkFollowExists" resultType="int">
+        SELECT COUNT(*) FROM follow_info
         WHERE user_no = #{user_no} AND to_user_no = #{to_user_no}
     </select>
 

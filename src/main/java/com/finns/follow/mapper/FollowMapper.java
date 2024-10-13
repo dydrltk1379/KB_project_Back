@@ -1,7 +1,10 @@
 package com.finns.follow.mapper;
 
 import com.finns.follow.dto.FollowDTO;
+import com.finns.member.dto.MemberDTO;
+import com.finns.security.account.domain.MemberVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,12 +28,19 @@ public interface FollowMapper {
      * @param user_no 사용자 번호
      * @return 팔로잉 사용자 번호 목록
      */
-    List<Integer> selectFollowingByUserNo(int user_no);
+    List<MemberVO> selectFollowingByUserNo(int user_no);
 
     /**
      * 특정 사용자를 팔로우하는 사용자 목록을 가져온다.
      * @param user_no 사용자 번호
      * @return 팔로워 사용자 번호 목록
      */
-    List<Integer> selectFollowersByUserNo(int user_no);
+    List<MemberVO> selectFollowersByUserNo(int user_no);
+
+    /**
+     * 팔로우 관계가 이미 존재하는지 확인한다.
+     * @param user_no 팔로우 정보를 담은 DTO
+     * @return 팔로우 관계가 존재하면 1, 존재하지 않으면 0
+     */
+    int checkFollowExists(@Param("user_no") int user_no, @Param("to_user_no") int to_user_no);
 }

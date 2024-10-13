@@ -1,8 +1,12 @@
 package com.finns.follow.controller;
 
 import com.finns.follow.dto.FollowDTO;
+import com.finns.follow.exception.AlreadyFollowingException;
+import com.finns.follow.exception.FollowNotFoundException;
 import com.finns.follow.service.FollowService;
+import com.finns.member.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,47 +20,43 @@ public class FollowController {
 
     private final FollowService followService;
 
-    /**
-     * 새로운 팔로우 관계를 추가한다.
-     * @param followDTO 팔로우 정보
-     * @return 성공 메시지
-     */
-    @PostMapping("")
-    public ResponseEntity<String> follow(@RequestBody FollowDTO followDTO) {
-        followService.follow(followDTO);
-        return ResponseEntity.ok("Followed successfully");
+    @PostMapping("/{to_user_no}")
+    public ResponseEntity<String> follow(@RequestBody FollowDTO followDTO, @PathVariable int to_user_no) {
+        followDTO.setTo_user_no(to_user_no);
+        try {
+            followService.follow(followDTO);
+            return ResponseEntity.ok("Followed successfully");
+        } catch (AlreadyFollowingException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    /**
-     * 팔로우 관계를 삭제한다 (언팔로우).
-     * @param followDTO 팔로우 정보
-     * @return 성공 메시지
-     */
-    @DeleteMapping("")
-    public ResponseEntity<String> unfollow(@RequestBody FollowDTO followDTO) {
-        followService.unfollow(followDTO);
-        return ResponseEntity.ok("Unfollowed successfully");
+    @DeleteMapping("/{to_user_no}")
+    public ResponseEntity<String> unfollow(@RequestBody FollowDTO followDTO, @PathVariable int to_user_no) {
+        followDTO.setTo_user_no(to_user_no);
+        try {
+            followService.unfollow(followDTO);
+            return ResponseEntity.ok("Unfollowed successfully");
+        } catch (FollowNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
-    /**
-     * 사용자가 팔로잉하고 있는 사용자 목록을 가져온다.
-     * @param user_no 사용자 번호
-     * @return 팔로잉 사용자 번호 목록
-     */
     @GetMapping("/following/{user_no}")
-    public ResponseEntity<List<Integer>> getFollowingList(@PathVariable int user_no) {
-        List<Integer> followingList = followService.getFollowingList(user_no);
+    public ResponseEntity<List<MemberDTO>> getFollowingList(@PathVariable int user_no) {
+        List<MemberDTO> followingList = followService.getFollowingList(user_no);
         return ResponseEntity.ok(followingList);
     }
 
-    /**
-     * 사용자를 팔로우하는 사용자 목록을 가져온다.
-     * @param user_no 사용자 번호
-     * @return 팔로워 사용자 번호 목록
-     */
     @GetMapping("/followers/{user_no}")
-    public ResponseEntity<List<Integer>> getFollowerList(@PathVariable int user_no) {
-        List<Integer> followerList = followService.getFollowerList(user_no);
+    public ResponseEntity<List<MemberDTO>> getFollowerList(@PathVariable int user_no) {
+        List<MemberDTO> followerList = followService.getFollowerList(user_no);
         return ResponseEntity.ok(followerList);
     }
+
+
+
+
+
+
 }
