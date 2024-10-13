@@ -41,4 +41,55 @@
         WHERE finance_product_no = #{financeProductNo}
     </select>
 
+    <!-- 예금(01)에서 intr_rate2(최고금리)가 가장 높은 항목 -->
+    <select id="selectHighestIntrRateForDeposit" resultType="com.finns.finance.dto.FinanceDTO">
+        SELECT *
+        FROM finance_product
+        WHERE finance_product_type = '01'
+        ORDER BY intr_rate2 DESC
+            LIMIT 1
+    </select>
+
+    <!-- 적금(02)에서 (최고금리)가 가장 높은 항목 -->
+    <select id="selectHighestIntrRateForSavings" resultType="com.finns.finance.dto.FinanceDTO">
+        SELECT *
+        FROM finance_product
+        WHERE finance_product_type = '02'
+        ORDER BY intr_rate2 DESC
+            LIMIT 1
+    </select>
+
+    <select id="selectTopDepositProductByUsers" resultType="com.finns.finance.dto.FinanceCount">
+        SELECT
+            p.finance_product_no AS financeProductNo,
+            COUNT(u.finance_product_no) AS productCount
+        FROM
+            finance_product p
+                LEFT JOIN
+            product_by_user u ON p.finance_product_no = u.finance_product_no
+        WHERE
+            p.finance_product_type = '01'  -- 예금
+        GROUP BY
+            p.finance_product_no
+        ORDER BY
+            productCount DESC
+            LIMIT 1
+    </select>
+
+    <select id="selectTopSavingsProductByUsers" resultType="com.finns.finance.dto.FinanceCount">
+        SELECT
+            p.finance_product_no AS financeProductNo,
+            COUNT(u.finance_product_no) AS productCount
+        FROM
+            finance_product p
+                LEFT JOIN
+            product_by_user u ON p.finance_product_no = u.finance_product_no
+        WHERE
+            p.finance_product_type = '02'  -- 적금
+        GROUP BY
+            p.finance_product_no
+        ORDER BY
+            productCount DESC
+            LIMIT 1
+    </select>
 </mapper>

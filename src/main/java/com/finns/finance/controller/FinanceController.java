@@ -1,6 +1,7 @@
 package com.finns.finance.controller;
 
 import com.finns.finance.dto.Finance;
+import com.finns.finance.dto.FinanceCount;
 import com.finns.finance.dto.FinanceDTO;
 import com.finns.finance.service.FinanceService;
 import io.swagger.annotations.Api;
@@ -36,5 +37,28 @@ public class FinanceController {
     @GetMapping("/product/no/{financeProductNo}")
     public FinanceDTO getFinanceProduct(@PathVariable("financeProductNo") Long financeProductNo) {
         return financeService.getinstallList(financeProductNo);
+    }
+
+    // 예금(01)의 가장 높은 금리를 가진 항목 반환
+    @GetMapping("/product/highest/deposit")
+    public FinanceDTO getHighestIntrRateForDeposit() {
+        return financeService.getHighestIntrRateForDeposit();
+    }
+
+    // 적금(02)의 가장 높은 금리를 가진 항목 반환
+    @GetMapping("/product/highest/savings")
+    public FinanceDTO getHighestIntrRateForSavings() {
+        return financeService.getHighestIntrRateForSavings();
+    }
+
+    // 사용자가 가장 많은 예금(01)
+    @GetMapping("/product/top/deposit")
+    public FinanceCount getTopDepositByUsers() {
+        return financeService.getTopDepositProductByUsers();
+    }
+    //사용자가 가장 많은 적금(01)
+    @GetMapping("/product/top/savings")
+    public FinanceCount getTopSavingsByUsers() {
+        return financeService.getTopSavingsProductByUsers();
     }
 }
