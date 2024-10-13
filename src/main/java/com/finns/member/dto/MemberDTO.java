@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class MemberDTO {
+
     private int user_no;
     private String username;
     private String password;
@@ -25,7 +26,7 @@ public class MemberDTO {
     private String img_url;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date renew_time;
-
+    private boolean following;
     MultipartFile avatar;
 
     private List<String> authList;
@@ -37,6 +38,7 @@ public class MemberDTO {
                 .birth(m.getBirth())
                 .mbti_name(m.getMbti_name())
                 .img_url(m.getImg_url())
+
                 .authList(m.getAuthList().stream().map(a->a.getAuthority()).toList())
                 .build();
     }

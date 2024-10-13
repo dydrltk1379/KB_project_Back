@@ -44,15 +44,13 @@
     <select id="selectFollowersByUserNo" resultMap="memberMap">
         SELECT u.user_no, u.username, u.img_url, u.birth, u.mbti_name, u.renew_time
         FROM follow_info f
-                 JOIN user u ON f.to_user_no = u.user_no
-        WHERE f.user_no = #{user_no}
+                 JOIN user u ON f.user_no = u.user_no
+        WHERE f.to_user_no = #{user_no}
     </select>
 
-
-    <!-- Check if a follow relationship exists -->
-    <select id="checkFollowExists" parameterType="com.finns.follow.dto.FollowDTO" resultType="int">
-        SELECT COUNT(*)
-        FROM follow_info
+    <!-- FollowMapper.xml -->
+    <select id="checkFollowExists" resultType="int">
+        SELECT COUNT(*) FROM follow_info
         WHERE user_no = #{user_no} AND to_user_no = #{to_user_no}
     </select>
 

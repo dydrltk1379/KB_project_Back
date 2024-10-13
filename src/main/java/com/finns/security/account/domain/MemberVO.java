@@ -24,7 +24,7 @@ public class MemberVO {
     private String img_url;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date renew_time;
-
+    private boolean following;
     private List<AuthVO> authList;
 
     UserDetails details;
