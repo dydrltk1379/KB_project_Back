@@ -10,6 +10,12 @@
         where user_no = #{userNo}
     </select>
 
+    <select id="selectAll" resultType="com.finns.user.dto.SearchUserDTO">
+        select user_no, username, birth, mbti_name, img_url, renew_time
+        from user
+    </select>
+
+
     <select id="selectTop3ForAmountByDate" parameterType="com.finns.user.dto.YearAndMonthDTO" resultType="com.finns.user.dto.UserTop3DTO">
         SELECT u.user_no, u.username, u.img_url, SUM(p.amount) AS total_amount
         FROM user u

@@ -33,6 +33,11 @@ public class UserService {
                 .orElseThrow(NoSuchElementException::new);
     }
 
+    public List<SearchUserDTO> getUsers() {
+        return Optional.ofNullable(userMapper.selectAll())
+                .orElseThrow(NoSuchElementException::new);
+    }
+
     public List<UserTop3DTO> getTop3ForAmountByDate(YearAndMonthDTO yearAndMonthDTO) {
         return Optional.ofNullable(userMapper.selectTop3ForAmountByDate(yearAndMonthDTO))
                 .orElseThrow(NoSuchElementException::new);
