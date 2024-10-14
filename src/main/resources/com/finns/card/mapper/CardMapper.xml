@@ -55,5 +55,16 @@
         LIMIT #{num};
     </select>
 
+    <select id="selectCardsByUser" resultType="com.finns.card.dto.Card">
+        SELECT
+            c.card_no, c.card_name, c.img_url
+        FROM
+            card c
+                LEFT JOIN
+            card_by_user cbu ON c.card_no = cbu.card_no
+        WHERE
+            cbu.user_no = #{userNo}
+    </select>
+
 
 </mapper>

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -57,4 +59,9 @@ public class FinanceService {
 
     // 카드 상품 한개 검색
     public CardDTO getCardList(Long no) {return financeMapper.selectOneCard(no);}
+
+    public List<FinanceDTO> getProductsByUser(Long userNo) {
+        return Optional.of(financeMapper.selectProductsByUser(userNo))
+                .orElseThrow(NoSuchElementException::new);
+    }
 }

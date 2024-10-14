@@ -122,4 +122,17 @@
         WHERE c.card_no = #{card_no}
         GROUP BY c.card_no;
     </select>
+
+    <select id="selectProductsByUser" resultType="com.finns.finance.dto.FinanceDTO">
+        SELECT
+            fp.finance_product_no, fp.finance_product_type, fp.fin_prdt_nm, fp.kor_co_nm, fc.img_url
+        FROM
+            product_by_user pbu
+                JOIN
+            finance_product fp ON pbu.finance_product_no = fp.finance_product_no
+                JOIN
+            finance_company fc ON fp.kor_co_nm = fc.kor_co_nm
+        WHERE
+            pbu.user_no = #{userNo};
+    </select>
 </mapper>
