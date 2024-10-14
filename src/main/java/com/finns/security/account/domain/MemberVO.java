@@ -26,6 +26,8 @@ public class MemberVO {
     private Date renew_time;
     private boolean following;
     private List<AuthVO> authList;
+    private String oldPassword; // 이전 비밀번호
+    private String newPassword; // 새로운 비밀번호 (네이밍 변경)
 
     UserDetails details;
 }
