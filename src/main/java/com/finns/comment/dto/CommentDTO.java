@@ -12,4 +12,6 @@ public class CommentDTO {
     private Long postNo;
     private Long userNo;
     private String content;
+    private String userName;
+    private String imgUrl;
 }

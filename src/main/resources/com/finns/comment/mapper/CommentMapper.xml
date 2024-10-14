@@ -7,7 +7,18 @@
 
     <!-- 소비내역에 있는 댓글 리스트 조회   -->
     <select id="getCommentByUser" resultType="com.finns.comment.dto.CommentDTO">
-        select * from comment
-            where post_no = #{post_no}
+        SELECT
+            c.comment_no,
+            c.post_no,
+            c.user_no,
+            c.content,
+            u.username,
+            u.img_url
+        FROM
+            comment c
+                JOIN
+            user u ON c.user_no = u.user_no
+        WHERE
+            c.post_no = #{postNo}
     </select>
 </mapper>
