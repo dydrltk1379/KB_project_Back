@@ -17,6 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/product")
 @Api(value = "FinanceController", tags = "금융상품 정보")
 @CrossOrigin(origins = "http://localhost:5173") // 클라이언트의 도메인을 허용
 public class FinanceController {
@@ -24,7 +25,7 @@ public class FinanceController {
     private final FinanceService financeService;
 
     // 금융 상품 리스트를 반환하는 API
-    @GetMapping("/product/{financeProductType}")
+    @GetMapping("/{financeProductType}")
     public ResponseEntity<List<FinanceDTO>> getProductList(@PathVariable("financeProductType") String financeProductType) {
         if ("01".equals(financeProductType)) {
             return ResponseEntity.ok(financeService.getDepositList());
@@ -36,43 +37,43 @@ public class FinanceController {
         }
     }
     // 특정 금융 상품 조회 API
-    @GetMapping("/product/no/{financeProductNo}")
+    @GetMapping("/no/{financeProductNo}")
     public FinanceDTO getFinanceProduct(@PathVariable("financeProductNo") Long financeProductNo) {
         return financeService.getinstallList(financeProductNo);
     }
 
     // 예금(01)의 가장 높은 금리를 가진 항목 반환
-    @GetMapping("/product/highest/deposit")
+    @GetMapping("/highest/deposit")
     public FinanceDTO getHighestIntrRateForDeposit() {
         return financeService.getHighestIntrRateForDeposit();
     }
 
     // 적금(02)의 가장 높은 금리를 가진 항목 반환
-    @GetMapping("/product/highest/savings")
+    @GetMapping("/highest/savings")
     public FinanceDTO getHighestIntrRateForSavings() {
         return financeService.getHighestIntrRateForSavings();
     }
 
     // 사용자가 가장 많은 예금(01)
-    @GetMapping("/product/top/deposit")
+    @GetMapping("/top/deposit")
     public FinanceCount getTopDepositByUsers() {
         return financeService.getTopDepositProductByUsers();
     }
     //사용자가 가장 많은 적금(01)
-    @GetMapping("/product/top/savings")
+    @GetMapping("/top/savings")
     public FinanceCount getTopSavingsByUsers() {
         return financeService.getTopSavingsProductByUsers();
     }
 
     // 카드 리스트를 반환하는 API
-    @GetMapping("/product/card")
+    @GetMapping("/card")
     public ResponseEntity<List<CardDTO>> getCardList() {
         List<CardDTO> cardList = financeService.getCardList();  // 카드 리스트 조회
         return ResponseEntity.ok(cardList);
     }
 
     // 카드 리스트를 반환하는 API
-    @GetMapping("/product/card/{cardNo}")
+    @GetMapping("/card/{cardNo}")
     public CardDTO getCardProduct(@PathVariable("cardNo") Long cardNo) {
         return financeService.getCardList(cardNo);
     }
