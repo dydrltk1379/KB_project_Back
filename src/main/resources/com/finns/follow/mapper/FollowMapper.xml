@@ -41,7 +41,7 @@
     </select>
 
     <!-- 사용자의 팔로워 목록을 가져옴 (user_no 값만 반환) -->
-    <select id="selectFollowersByUserNo" resultMap="memberMap">
+    <select id="selectFollowerByUserNo" resultMap="memberMap">
         SELECT u.user_no, u.username, u.img_url, u.birth, u.mbti_name, u.renew_time
         FROM follow_info f
                  JOIN user u ON f.user_no = u.user_no
@@ -60,13 +60,6 @@
 
     <select id="countFollowing" resultType="int">
         SELECT COUNT(*) FROM follow_info WHERE user_no = #{user_no}
-    </select>
-
-    <!-- FollowMapper.xml -->
-    <select id="checkFollowing" resultType="int">
-        SELECT user_no , to_user_no
-        FROM follow_info
-        WHERE user_no = #{user_no} AND to_user_no = #{to_user_no}
     </select>
 
 
