@@ -28,4 +28,6 @@ public interface FinanceMapper {
 
     // 카드 상품 한개 검색
     CardDTO selectOneCard(Long no);
+
+    List<FinanceDTO> selectProductsByUser(Long userNo);
 }

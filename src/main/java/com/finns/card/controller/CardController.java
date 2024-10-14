@@ -3,6 +3,7 @@ package com.finns.card.controller;
 import com.finns.card.dto.Card;
 import com.finns.card.pagination.PageResponse;
 import com.finns.card.service.CardService;
+import com.finns.finance.dto.FinanceDTO;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,12 @@ public class CardController {
     public ResponseEntity<List<Card>> recommend3CardsByUser(@PathVariable("no") long userNo, @PathVariable("num") int num) {
         List<Card> recommend3Cards = cardService.getRecommendNCards(userNo, num);
         return ResponseEntity.ok(recommend3Cards);
+    }
+
+    @GetMapping("/users/{no}/cards")
+    public ResponseEntity<List<Card>> getEnrolledCardsByUser(@PathVariable("no") Long userNo) {
+        List<Card> enrolledCards = cardService.getCardsByUser(userNo);
+        return ResponseEntity.ok(enrolledCards);
     }
 }
 

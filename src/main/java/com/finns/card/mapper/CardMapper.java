@@ -2,6 +2,7 @@ package com.finns.card.mapper;
 
 import com.finns.card.dto.Card;
 import com.finns.card.dto.RecommendNCardRequestDTO;
+import com.finns.finance.dto.FinanceDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,4 +16,7 @@ public interface CardMapper {
     Card selectCardById(long card_no); // 특정 카드 조회
 
     List<Card> selectRecommendNCards(RecommendNCardRequestDTO recommendNCardRequestDTO);
+
+    List<Card> selectCardsByUser(Long userNo);
+
 }

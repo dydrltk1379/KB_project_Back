@@ -78,4 +78,9 @@ public class FinanceController {
         return financeService.getCardList(cardNo);
     }
 
+    @GetMapping("/users/{no}/products")
+    public ResponseEntity<List<FinanceDTO>> getEnrolledProductsByUser(@PathVariable("no") Long userNo) {
+        List<FinanceDTO> enrolledProducts = financeService.getProductsByUser(userNo);
+        return ResponseEntity.ok(enrolledProducts);
+    }
 }

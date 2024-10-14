@@ -1,5 +1,6 @@
 package com.finns.follow.controller;
 
+import com.finns.follow.dto.FollowCountDTO;
 import com.finns.follow.dto.FollowDTO;
 import com.finns.follow.exception.AlreadyFollowingException;
 import com.finns.follow.exception.FollowNotFoundException;
@@ -54,6 +55,19 @@ public class FollowController {
         return ResponseEntity.ok(followerList);
     }
 
+    @GetMapping("/counts/{user_no}")
+    public ResponseEntity<FollowCountDTO> getFollowCounts(@PathVariable int user_no) {
+        FollowCountDTO counts = followService.getFollowCounts(user_no);
+        return ResponseEntity.ok(counts);
+    }
+
+    @GetMapping("/followingcheck")
+    public ResponseEntity<Boolean> checkFollowing(
+            @RequestParam int user_no,
+            @RequestParam int to_user_no) {
+        boolean Following = followService.checkFollowing(user_no, to_user_no);
+        return ResponseEntity.ok(Following);
+    }
 
 
 
