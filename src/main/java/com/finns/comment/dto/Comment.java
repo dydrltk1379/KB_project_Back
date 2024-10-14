@@ -12,4 +12,6 @@ public class Comment {
     private Long postNo;
     private Long userNo;
     private String content;
+    private String userName;
+    private String imgUrl;
 }

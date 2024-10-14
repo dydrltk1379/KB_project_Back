@@ -21,4 +21,10 @@
         WHERE
             c.post_no = #{postNo}
     </select>
+
+    <!-- 특정 게시물의 댓글 조회 쿼리 -->
+    <insert id="saveComment" parameterType="com.finns.comment.dto.CommentDTO">
+        INSERT INTO comment (post_no, user_no, content)
+        VALUES (#{postNo}, #{userNo}, #{content});
+    </insert>
 </mapper>

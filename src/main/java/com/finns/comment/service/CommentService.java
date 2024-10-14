@@ -14,12 +14,16 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @PropertySource({"classpath:/application.properties"})
-@Transactional(readOnly = true)
 public class CommentService {
     private final CommentMapper commentMapper;
 
     // 피드당 댓글 리스트 조회
     public List<CommentDTO> getCommentList(Long postNo) {
         return commentMapper.getCommentByUser(postNo);
+    }
+
+    // 새로운 댓글 저장
+    public void addComment(CommentDTO commentDTO) {
+        commentMapper.saveComment(commentDTO);
     }
 }
