@@ -5,15 +5,15 @@ import com.finns.card.dto.Card;
 import com.finns.card.dto.RecommendNCardRequestDTO;
 import com.finns.card.mapper.CardMapper;
 import com.finns.card.pagination.PageResponse;
+import com.finns.finance.dto.CardDTO;
+import com.finns.finance.dto.FinanceDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -69,6 +69,11 @@ public class CardService {
 
         String cardCategory = CATEGORY_MAP.getOrDefault(categoryByUser, categoryByUser);
         return cardCategory;
+    }
+
+    public List<Card> getCardsByUser(Long userNo) {
+        return Optional.of(cardMapper.selectCardsByUser(userNo))
+                .orElseThrow(NoSuchElementException::new);
     }
 
 }
