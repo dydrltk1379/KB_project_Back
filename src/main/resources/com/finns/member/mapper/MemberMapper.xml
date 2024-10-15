@@ -42,6 +42,8 @@
     <update id="update">
         UPDATE user
         SET
+            password = #{password},
+            img_url = #{img_url},
             renew_time = now()
         WHERE username =#{username}
     </update>
