@@ -21,7 +21,6 @@ import java.util.Optional;
 @PropertySource({"classpath:/application.properties"})
 @Transactional(readOnly = true)
 public class PostService {
-
     private final PostMapper postMapper;
     private final AmountByDateMapper amountByDateMapper;
     private final AmountByCategoryMapper amountByCategoryMapper;

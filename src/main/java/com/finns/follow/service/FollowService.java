@@ -26,7 +26,6 @@ public class FollowService {
         }
         followMapper.insertFollow(followDTO);
     }
-
     @Transactional
     public void unfollow(FollowDTO followDTO) {
         if (!isFollowing(followDTO.getUser_no(), followDTO.getTo_user_no())) {
