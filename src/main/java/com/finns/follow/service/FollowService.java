@@ -50,7 +50,7 @@ public class FollowService {
                 .collect(Collectors.toList());
     }
 
-    public boolean isFollowing(int user_no, int to_user_no) {
+    public boolean isFollowing(long user_no, long to_user_no) {
         return followMapper.checkFollowExists(user_no, to_user_no) > 0;
     }
 

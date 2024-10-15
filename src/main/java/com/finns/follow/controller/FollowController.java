@@ -62,8 +62,8 @@ public class FollowController {
 
     @GetMapping("/followingcheck")
     public ResponseEntity<Boolean> checkFollowing(
-            @RequestParam int user_no,
-            @RequestParam int to_user_no) {
+            @RequestParam long user_no,
+            @RequestParam long to_user_no) {
         boolean Following = followService.isFollowing(user_no, to_user_no);
         return ResponseEntity.ok(Following);
     }

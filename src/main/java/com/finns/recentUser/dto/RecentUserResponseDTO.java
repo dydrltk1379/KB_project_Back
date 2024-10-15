@@ -11,4 +11,5 @@ public class RecentUserResponseDTO {
     private long userNo;
     private String userName;
     private String imgUrl;
+    private boolean isFollow;
 }

@@ -127,4 +127,10 @@
         ORDER BY great_count DESC
             LIMIT 3
     </select>
+
+    <select id="selectGreatAndStupidCount" resultType="com.finns.post.dto.GreatAndStupidCount">
+        SELECT great_count, stupid_count
+        FROM post
+        WHERE post_no = #{postNo}
+    </select>
 </mapper>
