@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class FollowDTO {
     private int user_no;      // 팔로우하는 사용자 번호
     private int to_user_no;   // 팔로우 당하는 사용자 번호
-    private boolean folloing;
 }

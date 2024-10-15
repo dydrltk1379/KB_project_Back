@@ -21,7 +21,7 @@ public class FollowService {
 
     @Transactional
     public void follow(FollowDTO followDTO) {
-        if (Following(followDTO.getUser_no(), followDTO.getTo_user_no())) {
+        if (isFollowing(followDTO.getUser_no(), followDTO.getTo_user_no())) {
             throw new AlreadyFollowingException("이미 팔로우 중인 사용자입니다.");
         }
         followMapper.insertFollow(followDTO);
@@ -29,34 +29,30 @@ public class FollowService {
 
     @Transactional
     public void unfollow(FollowDTO followDTO) {
-        if (!Following(followDTO.getUser_no(), followDTO.getTo_user_no())) {
+        if (!isFollowing(followDTO.getUser_no(), followDTO.getTo_user_no())) {
             throw new FollowNotFoundException("팔로우 관계가 존재하지 않습니다.");
         }
         followMapper.deleteFollow(followDTO);
     }
 
-    public List<MemberDTO> getFollowingList(int user_no) {
+    public List<MemberDTO> getFollowingList(int user_no, int auth_no) {
         List<MemberVO> followingList = followMapper.selectFollowingByUserNo(user_no);
         return followingList.stream()
                 .map(this::convertToDTO)
-                .peek(dto -> dto.setFollowing(true))
+                .peek(dto -> dto.setFollowing(isFollowing(auth_no, dto.getUser_no())))
                 .collect(Collectors.toList());
     }
 
-    public List<MemberDTO> getFollowerList(int user_no) {
-        List<MemberVO> followerList = followMapper.selectFollowersByUserNo(user_no);
+    public List<MemberDTO> getFollowerList(int user_no, int auth_no) {
+        List<MemberVO> followerList = followMapper.selectFollowerByUserNo(user_no);
         return followerList.stream()
                 .map(this::convertToDTO)
-                .peek(dto -> dto.setFollowing(Following(user_no, dto.getUser_no())))
+                .peek(dto -> dto.setFollowing(isFollowing(auth_no, dto.getUser_no())))
                 .collect(Collectors.toList());
     }
 
-    public boolean Following(int user_no, int to_user_no) {
+    public boolean isFollowing(int user_no, int to_user_no) {
         return followMapper.checkFollowExists(user_no, to_user_no) > 0;
-    }
-
-    public boolean checkFollowing(int user_no, int to_user_no) {
-        return followMapper.checkFollowing(user_no, to_user_no) > 0;
     }
 
     private MemberDTO convertToDTO(MemberVO vo) {
@@ -70,6 +66,7 @@ public class FollowService {
                 .following(false) // 기본값을 false로 설정
                 .build();
     }
+
     public FollowCountDTO getFollowCounts(int user_no) {
         int followerCount = followMapper.countFollowers(user_no);
         int followingCount = followMapper.countFollowing(user_no);
