@@ -30,9 +30,9 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<SearchUserDTO>> SearchUsers() {
-        List<SearchUserDTO> users = userService.getUsers();
+    @GetMapping("/users/search/{no}")
+    public ResponseEntity<List<SearchUserDTO>> SearchUsers(@PathVariable("no") Long userNo) {
+        List<SearchUserDTO> users = userService.getUsers(userNo);
         return ResponseEntity.ok().body(users);
     }
 

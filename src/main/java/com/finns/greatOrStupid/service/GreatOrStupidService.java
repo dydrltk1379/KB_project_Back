@@ -4,6 +4,7 @@ import com.finns.greatOrStupid.dto.GreatOrStupid;
 import com.finns.greatOrStupid.dto.UpdateGreatOrStupidRequestDTO;
 import com.finns.greatOrStupid.dto.UpdateGreatOrStupidResponseDTO;
 import com.finns.greatOrStupid.mapper.GreatOrStupidMapper;
+import com.finns.post.dto.GreatAndStupidCount;
 import com.finns.post.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -25,7 +28,7 @@ public class GreatOrStupidService {
     private final PostMapper postMapper;
 
     @Transactional
-    public void toggleGreat(UpdateGreatOrStupidRequestDTO updateGreatOrStupidRequestDTO) {
+    public GreatAndStupidCount toggleGreat(UpdateGreatOrStupidRequestDTO updateGreatOrStupidRequestDTO) {
         Long userNo = updateGreatOrStupidRequestDTO.getUserNo();
         Long postNo = updateGreatOrStupidRequestDTO.getPostNo();
         boolean isGreat = updateGreatOrStupidRequestDTO.isGreatOrStupid();
@@ -67,6 +70,10 @@ public class GreatOrStupidService {
                 postMapper.incrementStupidCount(postNo); // 싫어요 카운트 증가
             }
         }
+
+        GreatAndStupidCount greatAndStupidCount = postMapper.selectGreatAndStupidCount(postNo);
+        return Optional.of(greatAndStupidCount)
+                .orElseThrow(NoSuchElementException::new);
     }
 
     public Boolean isGreat(Long userNo, Long postNo) {

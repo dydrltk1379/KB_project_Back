@@ -2,6 +2,7 @@ package com.finns.greatOrStupid.controller;
 
 import com.finns.greatOrStupid.dto.UpdateGreatOrStupidRequestDTO;
 import com.finns.greatOrStupid.service.GreatOrStupidService;
+import com.finns.post.dto.GreatAndStupidCount;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +21,9 @@ public class GreatOrStupidController {
     private final GreatOrStupidService greatOrStupidService;
 
     @PutMapping("/greatOrStupid")
-    public ResponseEntity<?> toggleGreat(@RequestBody UpdateGreatOrStupidRequestDTO updateGreatOrStupidRequestDTO) {
-        greatOrStupidService.toggleGreat(updateGreatOrStupidRequestDTO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<GreatAndStupidCount> toggleGreat(@RequestBody UpdateGreatOrStupidRequestDTO updateGreatOrStupidRequestDTO) {
+        GreatAndStupidCount greatAndStupidCount = greatOrStupidService.toggleGreat(updateGreatOrStupidRequestDTO);
+        return ResponseEntity.ok(greatAndStupidCount);
     }
 
     @GetMapping("/greatOrStupid/{userNo}/{postNo}/isGreat")

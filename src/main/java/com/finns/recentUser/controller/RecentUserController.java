@@ -15,7 +15,6 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@Api(value = "AmountByDateController", tags = "날짜별 총 소비 정보")
 @PropertySource({"classpath:/application.properties"})
 @CrossOrigin(origins = "http://localhost:5173") // 클라이언트의 도메인을 허용
 public class RecentUserController {

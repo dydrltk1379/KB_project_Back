@@ -40,6 +40,8 @@ public interface PostMapper {
     // 게시글의 stupid_count 감소 메서드
     void decrementStupidCount(Long postNo);
 
+    GreatAndStupidCount selectGreatAndStupidCount(Long postNo);
+
     // greatCount가 가장 높은 3개의 게시물 조회
     List<PostResponseDTO> getTop3PostsByGreatCount();
 }

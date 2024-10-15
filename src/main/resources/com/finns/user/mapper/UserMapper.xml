@@ -13,6 +13,7 @@
     <select id="selectAll" resultType="com.finns.user.dto.SearchUserDTO">
         select user_no, username, birth, mbti_name, img_url, renew_time
         from user
+        where user_no != #{userNo}
     </select>
 
 

@@ -11,4 +11,5 @@ public class SearchUserDTO {
     private long userNo;
     private String userName;
     private String imgUrl;
+    private boolean isFollow;
 }

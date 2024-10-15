@@ -11,7 +11,7 @@
                 LEFT JOIN
             user u ON ru.to_user_no = u.user_no
         WHERE
-            ru.user_no = #{userNo}
+            ru.user_no = #{userNo} AND u.user_no != #{userNo}
         ORDER BY
             ru.view_time DESC
         LIMIT 7
