@@ -36,7 +36,7 @@ public class CardController {
     }
 
     @GetMapping("/users/{no}/recommendCards/{num}")
-    public ResponseEntity<List<Card>> recommend3CardsByUser(@PathVariable("no") long userNo, @PathVariable("num") int num) {
+    public ResponseEntity<List<Card>> recommendCardsByUser(@PathVariable("no") long userNo, @PathVariable("num") int num) {
         List<Card> recommend3Cards = cardService.getRecommendNCards(userNo, num);
         return ResponseEntity.ok(recommend3Cards);
     }
