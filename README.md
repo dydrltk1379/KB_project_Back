@@ -1,96 +1,177 @@
-# FInNS - 백엔드 레포지토리
+# 🚀 FInNS
+> 자산 관리, 금융상품 추천·비교, 커뮤니티 기능을 제공하는 금융 SNS 플랫폼의 백엔드 서버
 
-**재테크를 위한 금융 상품 비교 추천 플랫폼 - FInNS**  
-본 프로젝트는 Vue.js와 Spring Framework를 기반으로 한 금융 SNS 플랫폼으로, 사용자에게 금융 상품 추천, 비교 및 커뮤니티 기능을 제공합니다. 이 저장소는 백엔드 API 서버를 담당하며, Spring Boot를 기반으로 다양한 비즈니스 로직과 데이터 처리 기능을 수행합니다.
-
-## 🏆 수상 이력
-- **국민은행 it's your life 5기 부트캠프** 최우수상 수상작
-- 주제: “2030세대 재테크 습관 형성을 위한 금융 플랫폼 개발”
+<img width="1209" height="563" alt="FInNS 대표 이미지" src="https://github.com/user-attachments/assets/36c4ee31-945a-4af9-8648-6190780337c0" />
 
 ---
+<br>
 
-## 📌 주요 기능
+## 📝 1. 프로젝트 개요
+FInNS는 자산 관리, 금융상품 추천·비교, 커뮤니티 기능을 제공하는 금융 SNS 플랫폼입니다.  
+본 저장소는 FInNS의 백엔드 서버로, 사용자 인증, 금융상품 조회·추천, 사용자 활동 관리, 커뮤니티 API를 제공합니다.  
 
-### 1. 금융 상품 추천 API
-- 국내 주요 은행/카드사/보험사 상품 크롤링 및 정제
-- 사용자 관심사에 기반한 맞춤형 금융 상품 추천
-- 카테고리별(예적금/카드/보험) 정렬 및 필터링 기능 제공
+또한 공공 API 및 크롤링 기반의 금융 데이터 수집·전처리 로직을 구현했으며,  
+대량 데이터 조회를 고려한 페이지네이션 구조를 적용했습니다.
 
-### 2. 금융 상품 크롤링 및 전처리
-- 공공 API + 웹 크롤링 혼합 방식
-- 금융 데이터 전처리 및 DB 저장 자동화
-
-### 3. 사용자 금융 활동 관리
-- 가입/저장한 금융 상품 리스트 조회 API
-- 사용자별 커뮤니티 활동 내역, 포인트 관리 API
-
-### 4. 커뮤니티 기능 백엔드 지원
-- 게시글 등록, 수정, 삭제, 댓글 기능
-- 포인트 제도 및 활동 기반 랭킹 기능
+## 🏆 2. 수상 이력
+- KB국민은행 It's Your Life 5기 부트캠프 최우수상 수상작
 
 ---
+<br>
 
-## 🛠 기술 스택
+## 👥 3. 팀 구성 및 담당 역할
+- 6인 프로젝트 (기획/프론트/백엔드 혼합)
+- 담당 역할 [백엔드]
+  - 핵심 API 설계
+  - DB 구조 설계
+  - 금융상품 추천/비교 로직 구현
+  - 대량 데이터 처리 및 성능 개선
+ 
+---
+<br>
 
-- **Frontend**: Vue.js, Vuex, Vue Router, Axios(→ [FrontEnd Repo](https://github.com/dydrltk1379/KB_Project_FrontEnd))
-- **Backend**: Spring, JPA, MySQL 
-- **배포**: AWS EC2 (백엔드)
+## ✨ 4. 핵심 기능
+### 1. 금융상품 조회 및 추천
+- 금융상품 데이터 조회 API 제공
+- 사용자 관심사 기반 추천 및 상품 비교 기능 구현
+- 카테고리별 정렬 및 필터링 지원
+
+### 2. 금융 데이터 수집 및 전처리
+- 공공 API 및 웹 크롤링 기반 금융 데이터 수집
+- 수집 데이터 전처리 및 DB 저장 로직 구현
+
+### 3. 사용자 기능
+- Spring Security & JWT 기반 무상태(Stateless) 인증 및 인가 처리
+- 저장한 금융상품 조회, 사용자 활동 내역 및 포인트 관리
+
+### 4. 커뮤니티 기능
+- 게시글 / 댓글 CRUD API 구현
+- 활동 기반 포인트 및 랭킹 기능 지원
 
 ---
+<br>
 
-## 🧑‍💻 담당 역할 (작성자 중심)
+## 🔧 5. Engineering Highlights
 
-### ✅ 백엔드 개발 (Spring Boot)
-- 전체 API 설계 및 ERD 기반 DB 구조 설계
-- 금융 상품 비교 및 추천 알고리즘 구현
-- 카테고리, 정렬 기준에 따른 필터링 API 설계
+### [1] 대용량 금융 데이터 조회 성능 개선
+- **문제**  
+  금융상품 데이터가 증가하면서, 목록 조회 API의 뒷페이지 응답 속도가 크게 저하되었습니다.  
+  기존 Offset 기반 페이지네이션은 페이지가 깊어질수록 불필요한 스캔 비용이 커지는 구조였습니다.
 
-### ✅ 대량 금융 데이터 처리
-- 금융 상품 크롤링 로직 설계 (Jsoup, RestTemplate 활용)
-- 정제 로직 구현 및 RDBMS 설계 (MySQL)
-- 대량 데이터 처리를 위한 **커서 기반 페이지네이션** 구현
+- **해결**  
+  Offset 기반 조회를 **Cursor 기반 페이지네이션**으로 전환해  
+  페이지 깊이에 따른 성능 저하를 줄였습니다.
 
-### ✅ 시스템 통합 및 테스트
-- 프론트엔드(Vue)와 RESTful API 통신 설계 및 협업
-- Postman을 활용한 API 테스트 및 예외 처리 설계
+- **결과**  
+  - Offset 기반: Page Depth 3000에서 **3,229ms**
+  - Cursor 기반(Hybrid): 평균 **47ms**
+  - 최대 응답 시간 기준 **약 98% 개선**
+
+<img width="100%" height="auto" alt="JMeter 성능 비교 결과" src="https://github.com/user-attachments/assets/3a8afb89-fcb4-4b99-900a-3bbd4c087681" />
+
+> JMeter를 활용해 3만 건 데이터 기준 페이지 깊이에 따른 응답 시간을 비교했습니다.
+
+### [2] 이기종 금융 데이터 정합성 개선
+- **문제**  
+  공공 API와 크롤링 데이터 간 날짜 포맷, Null 처리 방식 차이로  
+  저장 과정에서 예외가 발생하고 데이터 정합성이 흔들리는 문제가 있었습니다.
+
+- **해결**  
+  **Data Pre-processing Layer**를 분리해 정규화 로직을 통합하고,  
+  MyBatis `TypeHandler`와 `ON DUPLICATE KEY UPDATE`를 적용해  
+  포맷 변환과 중복 데이터 처리를 일관되게 수행했습니다.
+
+- **결과**  
+  데이터 저장 과정의 예외를 줄이고,  
+  상품 추천·비교 로직에서 더 안정적인 데이터 품질을 확보했습니다.
 
 ---
+<br>
 
-## 🗂️ 프로젝트 구조
+## 🛠 6. 기술 스택
+
+| 분류 | 기술 | 도입 목적 |
+| :--- | :--- | :--- |
+| 언어 | ![Java](https://img.shields.io/badge/Java_17-007396?style=flat-square&logo=openjdk&logoColor=white) | 비즈니스 로직 구현 및 안정적인 서버 애플리케이션 개발 |
+| 프레임워크 | ![Spring Framework](https://img.shields.io/badge/Spring_Framework-6DB33F?style=flat-square&logo=spring&logoColor=white) | REST API 구성 및 계층형 아키텍처 기반 서버 개발 |
+| 데이터 접근 | ![MyBatis](https://img.shields.io/badge/MyBatis-BE1E2D?style=flat-square&logoColor=white) | SQL 중심 데이터 접근 및 쿼리 제어 |
+| 데이터베이스 | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) | 사용자·금융상품·커뮤니티 데이터 저장 |
+| 보안 | ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=flat-square&logo=springsecurity&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white) | 인증·인가 처리 및 토큰 기반 사용자 인증 구현 |
+| API 문서 / 테스트 | ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=flat-square&logo=swagger&logoColor=black) ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=postman&logoColor=white) | API 문서화 및 엔드포인트 기능 검증 |
+| 배포 환경 | ![AWS EC2](https://img.shields.io/badge/AWS_EC2-FF9900?style=flat-square&logo=amazonec2&logoColor=white) | 서버 배포 및 실행 환경 구성 |
+| 빌드 도구 | ![Gradle](https://img.shields.io/badge/Gradle-02303A?style=flat-square&logo=gradle&logoColor=white) | 프로젝트 빌드 및 의존성 관리 |
+
+---
+<br>
+
+## 🏗 7. 시스템 아키텍처
+
+<div align="center">
+  <img width="799" height="480" alt="image" src="https://github.com/user-attachments/assets/50c3cc44-2680-4217-9684-90f527e7803b" />
+</div>
+
+> Client 요청을 **Spring 기반 백엔드 서버**에서 처리하고, 인증/인가, 금융 데이터 처리, 커뮤니티 도메인, DB 연동을 독립적으로 분리하여 구성했습니다.
+
+---
+<br>
+
+## 🗂️ 8. 프로젝트 구조
+
+```bash
 src
-- ├── main
-- │ ├── java/com/fintech/finns
-- │ │ ├── controller
-- │ │ ├── domain
-- │ │ ├── repository
-- │ │ ├── service
-- │ │ └── dto
-- │ └── resources
-- │ ├── application.yml
-- │ └── static/
-- └── test
+└── main
+    ├── java
+    │   └── com
+    │       ├── finns
+    │       │   ├── config       # 보안, Swagger, DB 설정
+    │       │   ├── controller   # API 엔드포인트 정의
+    │       │   ├── service      # 핵심 비즈니스 로직
+    │       │   ├── repository   # 데이터 접근 계층 (MyBatis 연동)
+    │       │   ├── domain       # 주요 도메인 모델
+    │       │   ├── dto          # 요청/응답 및 계층 간 데이터 전달 객체
+    │       │   ├── exception    # 공통 예외 처리
+    │       │   └── security     # JWT, 인증/인가 처리
+    │       └── kb               # 공통/보조 패키지
+    ├── resources
+    │   ├── application.yml      # DB, JWT, 외부 API 등 환경 설정
+    │   └── mapper               # MyBatis SQL 매퍼 파일
+    └── webapp                   # 웹 리소스 및 웹 설정
+```
 
 ---
+<br>
 
-## 📈 주요 성과
-
-- 대용량 금융 데이터(1만건의 소비내역 + 금융 상품 정보 + 카드 정보)를 처리하기 위한 **커서 기반 페이지네이션 적용**
-- 사용자 피드백 기반으로 UI/UX 개선
-- 금융 크롤링 데이터를 기반으로 사용자 맞춤 콘텐츠 제공
-- 실제 배포 환경에서의 테스트 및 배포 경험(Netlify 활용)
-
-- ## 💬 협업 방식
-
-- GitHub Issues + Projects로 기능 단위 태스크 관리
-- Notion 기반 스프린트 회고 및 일정 공유
-- Figma로 UI 프로토타입 제작 후 구현
-- GitHub Flow 방식으로 브랜치 운영 및 PR 리뷰
+## 🗄️ 9. ERD
+<img width="1710" height="748" alt="image" src="https://github.com/user-attachments/assets/70ac7896-1964-45a3-9d70-0f1640c75f39" />
 
 ---
+<br>
 
-## 📎 관련 링크
+## 📌 10. API 
+- 인증: 회원가입, 로그인, JWT 기반 인증
+- 금융상품: 목록 조회, 추천, 비교
+- 커뮤니티: 게시글/댓글 CRUD
+- 상세 명세: **[Notion API 문서](https://www.notion.so/KB-bec379c70ede8393888b81af62dac0ed?source=copy_link)**
+  
+---
+<br>
 
-- 🔗 [프론엔드 저장소](https://github.com/KB-FInNS/KB_Project_FrontEnd)
-- 📑 발표 자료 [FInNS_portfolio.pdf](https://github.com/user-attachments/files/21430052/FInNS_portfolio.pdf)
-- 🎓 부트캠프: KB국민은행 it's your life 5기
+## ⚙️ 11. 실행 방법
+### 📋 Prerequisites
+- Java 17
+- MySQL 8.0 이상
+- Gradle 7.x 이상
 
+### 🚀 Installation
+```bash
+git clone https://github.com/dydrltk1379/KB_project_Back.git
+cd KB_project_Back
+./gradlew build
+```
+
+---
+<br>
+
+## 📎 주요 관련 링크
+- 📑 **[발표 자료](https://github.com/user-attachments/files/21430052/FInNS_portfolio.pdf)**
+- 🔗 **[Frontend Repository](https://github.com/dydrltk1379/KB_Project_FrontEnd)**
